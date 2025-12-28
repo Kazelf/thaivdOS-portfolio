@@ -75,17 +75,17 @@ body {
 
 .window-header {
   @apply p-2.5 flex items-center justify-between w-full
-   bg-base-200 text-base-foreground text-sm font-bold text-center rounded-t-2xl border-b border-b-base-300;
+   bg-base-200 text-sm font-bold text-center rounded-t-2xl border-b border-b-base-300;
 }
 
 .window-footer {
-  @apply p-2.5 flex items-center justify-between w-full bg-base text-base-foreground text-sm font-bold text-center rounded-b-2xl;
+  @apply p-2.5 flex items-center justify-between w-full bg-base text-sm font-bold text-center rounded-b-2xl;
 }
 
 .side-bar {
   div {
     h3 {
-      @apply text-base-foreground text-xs font-medium mb-2;
+      @apply text-xs font-medium mb-2;
     }
 
     ul {

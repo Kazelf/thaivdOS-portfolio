@@ -24,12 +24,12 @@ const Text = () => {
           <Image
             src={image}
             alt={name}
-            width={30}
-            height={30}
-            className="rounded"
+            width={150}
+            height={150}
+            className="rounded-lg"
           />
         ) : null}
-        {subtitle ? <h2 className="font-semibold">{subtitle}</h2> : null}
+        {subtitle ? <h2 className="font-semibold my-3">{subtitle}</h2> : null}
 
         {Array.isArray(description) && description.length > 0 ? (
           <div className="space-y-3 leading-relaxed">

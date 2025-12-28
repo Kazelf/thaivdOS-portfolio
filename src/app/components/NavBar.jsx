@@ -11,7 +11,7 @@ const NavBar = () => {
   const { openWindow } = useWindowStore();
 
   return (
-    <nav className="bg-base-300/70 backdrop-blur-3xl text-base-foreground select-none flex justify-between items-center p-3 px-5 fixed top-0 left-0 right-0 z-10 ">
+    <nav className="bg-base-300/70 backdrop-blur-3xl select-none flex justify-between items-center p-3 px-5 fixed top-0 left-0 right-0 z-10 ">
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         <p className={`text-lg font-bold`}>thaivdOS</p>
 
