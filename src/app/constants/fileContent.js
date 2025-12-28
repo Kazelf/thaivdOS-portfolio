@@ -96,8 +96,8 @@ const WORK_LOCATION = {
           fileType: "txt",
           subtitle: "thaivdOS Portfolio",
           description: [
-            "A single-page personal website inspired by the macOS desktop experience, youtube Javascript Mastery, designed to deliver an interactive and visually engaging user interface.",
-            "The project is built with Next.js 16, Tailwind CSS, while application state and window management are efficiently managed with Zustand and Immer. Smooth and natural animations are implemented using GSAP.",
+            "A single-page personal website inspired by the macOS GUI and Javascript Mastery youtube channel, designed to deliver an interactive and visually engaging user interface.",
+            "The project is built with Next.js 16, Tailwind CSS, while application state and window management are managed with Zustand and Immer. Animations are implemented using GSAP.",
           ],
         },
         {
@@ -140,6 +140,8 @@ const ABOUT_LOCATION = {
         "📍Hanoi, Vietnam",
         "I am a student at FPT University with a 100% scholarship.",
         "Currently, I am focusing on becoming a Backend Developer, with my main technologies being Node.js, Express.js, and database tools such as SQL Server and MongoDB. In addition, I have worked on some projects using React.js, Next.js, and Tailwind CSS.",
+        "My Email: vudinhthai081106@gmail.com",
+        "Linkedin: https://www.linkedin.com/in/thaivd0811/",
       ],
     },
     {
@@ -148,7 +150,7 @@ const ABOUT_LOCATION = {
       icon: "/icons/finder/png.svg",
       kind: "file",
       fileType: "img",
-      image: "/images/vudinhthai.png",
+      image: "/images/thai.png",
     },
   ],
 };

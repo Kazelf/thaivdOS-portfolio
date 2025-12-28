@@ -13,7 +13,7 @@ const Contact = () => {
         <h2 className="w-full">Contact me</h2>
       </div>
 
-      <div className="p-5 space-y-5 bg-base">
+      <div className="window-content space-y-5">
         <Image
           src={"/images/vudinhthai.png"}
           alt="Image of Thai"

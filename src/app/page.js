@@ -6,6 +6,7 @@ import {
   Contact,
   Text,
   ImageWindow,
+  Safari,
 } from "./windows";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Terminal />
       <Resume />
       <Finder />
+      <Safari />
       <Contact />
       <Text />
       <ImageWindow />

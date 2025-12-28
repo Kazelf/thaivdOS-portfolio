@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+import { gsap, useGSAP } from "@/lib/gsapClient";
 
 const FONT_WEIGHT = {
   subtitle: { min: 100, max: 400, default: 100 },
@@ -75,8 +75,15 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="select-none cursor-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
+      className="flex flex-col items-center gap-10 select-none cursor-default fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center"
     >
+      {/* <Image
+        src={"/images/thai.png"}
+        alt="Thai's Image"
+        width={240}
+        height={240}
+        className="rounded-full bg-base/40 backdrop-blur-3xl"
+      /> */}
       <div>
         <p ref={subtitleRef}>
           {renderText(

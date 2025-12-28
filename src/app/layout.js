@@ -1,5 +1,6 @@
 import { Georama, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import "react-vertical-timeline-component/style.min.css";
 
 const georama = Georama({
   subsets: ["latin"],

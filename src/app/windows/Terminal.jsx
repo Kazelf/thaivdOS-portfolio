@@ -13,7 +13,7 @@ const Terminal = () => {
         <h2 className="w-full">Tech stack</h2>
       </div>
 
-      <div className="flex flex-col gap-5 font-mono bg-base p-4">
+      <div className="window-content flex flex-col gap-5 font-mono">
         <div className="tech-stack">
           <span className="font-bold">@thaivd %</span>
           show tech stack

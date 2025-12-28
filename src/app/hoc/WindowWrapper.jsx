@@ -7,7 +7,7 @@ import { gsap, Draggable } from "@/lib/gsapClient";
 const WindowWrapper = (Component, windowKey) => {
   const Wrapped = (props) => {
     const { focusWindow, windows } = useWindowStore();
-    const { isOpen, zIndex } = windows[windowKey];
+    const { isOpen, zIndex, data } = windows[windowKey];
     const ref = useRef(null);
 
     useGSAP(() => {
@@ -35,7 +35,7 @@ const WindowWrapper = (Component, windowKey) => {
       });
 
       return () => instance.kill();
-    }, []);
+    }, [data]);
 
     useLayoutEffect(() => {
       const el = ref.current;

@@ -16,10 +16,10 @@ const Text = () => {
     <div className="window w-lg">
       <div className="window-header">
         <WindowControls target="txtfile" />
-        <h2>{name}</h2>
+        <h2 className="flex-1">{name}</h2>
       </div>
 
-      <div className="bg-base p-4">
+      <div className="window-content">
         {image ? (
           <Image
             src={image}

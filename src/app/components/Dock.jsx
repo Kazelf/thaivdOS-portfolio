@@ -109,7 +109,8 @@ const Dock = () => {
         <Tooltip
           id="dock-tooltip"
           place="top"
-          className="bg-indigo-200! text-indigo-800! shadow-2xl! text-xs!"
+          noArrow="true"
+          className="bg-base/70! backdrop-blur-lg! text-base-foreground! shadow-2xl!"
         />
       </div>
     </section>
