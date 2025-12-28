@@ -9,9 +9,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@heroicons/react": "^2.2.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
+    "gsap": "^3.14.2",
+    "immer": "^11.1.0",
+    "lucide-react": "^0.562.0",
     "next": "16.1.0",
+    "next-themes": "^0.4.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-pdf": "^10.2.0",
+    "react-tooltip": "^5.30.0",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

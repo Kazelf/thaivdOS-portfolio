@@ -1,17 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +7,103 @@
   }
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("/images/wallpaper.png");
+
+  background-blend-mode: darken;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ===== Theme ===== */
+@theme {
+  --font-georama: var(--font-georama);
+  --font-roboto: var(--font-roboto-mono);
+
+  --color-base: #ffffff;
+  --color-base-200: #f3f4f6;
+  --color-base-300: #e5e7eb;
+  --color-base-foreground: #1f2937;
+
+  --color-primary: #0069ff;
+  --color-primary-200: #93c5fd;
+  --color-primary-300: #2563eb;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #c148ac;
+  --color-secondary-foreground: #0e020b;
+
+  --color-neutral: #1f2937;
+  --color-neutral-200: #111827;
+  --color-neutral-300: #020617;
+  --color-neutral-foreground: #f9fafb;
+
+  --color-bg: #ffffff;
+  --color-text: #1f2937;
+  --color-border: #e2e8f0;
+
+  --breakpoint-3xl: 1920px;
+}
+
+/* ===== Utilities ===== */
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility col-center {
+  @apply flex flex-col items-center justify-center;
+}
+
+.icon {
+  @apply rounded-md w-8 h-8 p-2 hover:bg-base-300 hover:text-neutral-200 cursor-pointer;
+}
+
+.nav-icon {
+  @apply rounded-md w-8 h-8 p-2 hover:bg-primary-200 hover:text-neutral-200 cursor-pointer;
+}
+
+.window {
+  @apply rounded-2xl overflow-hidden shadow-2xl/50;
+}
+
+.window-header {
+  @apply p-2.5 flex items-center justify-between w-full
+   bg-base-200 text-base-foreground text-sm font-bold text-center rounded-t-2xl border-b border-b-base-300;
+}
+
+.window-footer {
+  @apply p-2.5 flex items-center justify-between w-full bg-base text-base-foreground text-sm font-bold text-center rounded-b-2xl;
+}
+
+.side-bar {
+  div {
+    h3 {
+      @apply text-base-foreground text-xs font-medium mb-2;
+    }
+
+    ul {
+      li {
+        @apply flex items-center gap-2 p-2 rounded-lg mx-3 mb-1 cursor-pointer;
+      }
+    }
+
+    .active {
+      @apply bg-blue-200 text-blue-600;
+    }
+
+    .not-active {
+      @apply hover:bg-base-300;
+    }
+  }
+}
+
+.app-icon {
+  @apply flex flex-col p-2 w-28 select-none gap-2 items-center text-center text-shadow-2xs hover:bg-base-200 hover:text-base-foreground transition-colors duration-200;
 }
