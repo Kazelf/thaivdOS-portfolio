@@ -4,14 +4,21 @@ const activities = [
     date: "Jan 2025 - now",
     title: "JS Club - Japanese Software Engineers",
     role: "Member of Expertise Department",
-    description: ["Building", "Mentor", "Learning and competing"],
+    description: [
+      "Built projects and organized events",
+      "Mentored newcomers / new members",
+      "Studied and participated in algorithm competitions, hackathons",
+    ],
   },
   {
     id: 2,
     date: "May 2025 - July 2025",
     title: "Codefest 2025",
     role: "SDK Developer, Takecare",
-    description: ["Building", "Mentor", "Learning and competing"],
+    description: [
+      "Designed and developed the J-Surviv game and its game toolkit",
+      "Guided participants on the rules and how to use the toolkit",
+    ],
   },
 ];
 
@@ -31,7 +38,9 @@ const achievements = [
     date: "Feb 2025",
     title: "Algorithm Arena 6.0: Enjourney",
     role: "Third Prize",
-    description: ["An algorithm competition ."],
+    description: [
+      "Competed and win third prize in an algorithm competition organized inside JS Club.",
+    ],
   },
   {
     id: 1,
@@ -39,7 +48,7 @@ const achievements = [
     title: "F Talent Code 2025",
     role: "Participated",
     description: [
-      "Highest Total Score of Mathematics, Physics and Chemistry with the score 29.6 in the 2024 National High School Graduation Exam with 1,000,000+ participants.",
+      "Competed and ranked in the Top 40 of Group A - Professional division",
     ],
   },
   {
@@ -48,7 +57,7 @@ const achievements = [
     title: "VPBank Hackthon 2025",
     role: "Participated",
     description: [
-      "Highest Total Score of Mathematics, Physics and Chemistry with the score 29.6 in the 2024 National High School Graduation Exam with 1,000,000+ participants.",
+      "Proposed idea about the problem: AI Financial coach_Six Jars Money Management of Banking Apps",
     ],
   },
 ];

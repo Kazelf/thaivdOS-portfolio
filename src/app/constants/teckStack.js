@@ -1,11 +1,11 @@
 const techStack = [
   {
-    category: "Frontend",
-    items: ["ReactJS", "NextJS", "TailwindCSS", "Javascript"],
-  },
-  {
     category: "Backend",
     items: ["NodeJS", "ExpressJS"],
+  },
+  {
+    category: "Frontend",
+    items: ["ReactJS", "NextJS", "TailwindCSS", "Javascript"],
   },
   {
     category: "Database",
