@@ -60,8 +60,6 @@ const Dock = () => {
   });
 
   const toggleApp = (app) => {
-    if (!app.canOpen) return;
-
     const window = windows[app.id];
 
     if (!window) return;
@@ -78,13 +76,13 @@ const Dock = () => {
   return (
     <section
       id="dock"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden"
+      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-md:hidden"
     >
       <div
         ref={dockRef}
         className="dock-container bg-white/20 backdrop-blur-md flex justify-between items-end rounded-2xl p-1.5 gap-1.5"
       >
-        {dockApps.map(({ id, name, icon, canOpen }) => (
+        {dockApps.map(({ id, name, icon }) => (
           <div key={id} className="relative flex justify-center">
             <button
               type="button"
@@ -93,14 +91,13 @@ const Dock = () => {
               data-tooltip-id="dock-tooltip"
               data-tooltip-content={name}
               data-tooltip-delay-show={50}
-              disabled={!canOpen}
-              onClick={() => toggleApp({ id, canOpen })}
+              onClick={() => toggleApp({ id })}
             >
               <img
                 src={`/icons/apps/${icon}`}
                 alt="name"
                 loading="lazy"
-                className={`w-full h-full p-1 ${canOpen ? "" : "opacity-60"}`}
+                className={`w-full h-full p-1`}
               />
             </button>
           </div>

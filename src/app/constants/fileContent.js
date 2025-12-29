@@ -40,7 +40,7 @@ const WORK_LOCATION = {
         {
           id: 4,
           name: "Source.github",
-          icon: "/icons/apps/safari.svg",
+          icon: "/icons/finder/html.svg",
           kind: "file",
           fileType: "url",
           url: "https://github.com/nobitandoraemon/SoulSync-be",
@@ -111,7 +111,7 @@ const WORK_LOCATION = {
         {
           id: 3,
           name: "Source.github",
-          icon: "/icons/apps/safari.svg",
+          icon: "/icons/finder/html.svg",
           kind: "file",
           fileType: "url",
           url: "https://github.com/Kazelf/thaivdOS-portfolio",
@@ -139,9 +139,9 @@ const ABOUT_LOCATION = {
       description: [
         "📍Hanoi, Vietnam",
         "I am a student at FPT University with a 100% scholarship.",
-        "Currently, I am focusing on becoming a Backend Developer, with my main technologies being Node.js, Express.js, and database tools such as SQL Server and MongoDB. In addition, I have worked on some projects using React.js, Next.js, and Tailwind CSS.",
+        "Currently, I am focusing on becoming a <b>Backend Developer</b>, with my main technologies being <b>Node.js, Express.js</b>, and database tools such as <b>SQL Server, MongoDB</b>. In addition, I have worked on some projects using <b>React.js, Next.js,</b> and <b>Tailwind CSS.</b>",
         "My Email: vudinhthai081106@gmail.com",
-        "Linkedin: https://www.linkedin.com/in/thaivd0811/",
+        'Linkedin: <a href="https://www.linkedin.com/in/thaivd0811/" target="_blank"> https://www.linkedin.com/in/thaivd0811/ </a>',
       ],
     },
     {
@@ -155,7 +155,26 @@ const ABOUT_LOCATION = {
   ],
 };
 
+const RESUME_LOCATION = {
+  id: 3,
+  type: "resume",
+  name: "Resume",
+  icon: "/icons/finder/resume.svg",
+  kind: "folder",
+  children: [
+    {
+      id: 1,
+      name: "resume.pdf",
+      icon: "/icons/finder/pdf.svg",
+      kind: "file",
+      fileType: "url",
+      url: "/files/resume.pdf",
+    },
+  ],
+};
+
 export const locations = {
   work: WORK_LOCATION,
   about: ABOUT_LOCATION,
+  resume: RESUME_LOCATION,
 };

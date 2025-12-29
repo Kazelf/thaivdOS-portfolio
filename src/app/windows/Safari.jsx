@@ -21,7 +21,7 @@ import { WindowControls } from "../components";
 import { activities, experiences, achievements } from "../constants";
 
 const Safari = () => {
-  const renderSection = (title, items, Icon) => (
+  const renderTimeLine = (title, items, Icon) => (
     <div className="bg-base-200 p-2 rounded-2xl">
       <h2 className="font-bold text-xl mb-3">{title}</h2>
       <VerticalTimeline lineColor="var(--color-primary)" layout="1-column-left">
@@ -87,10 +87,10 @@ const Safari = () => {
 
       <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1">
         <div className="flex flex-col gap-10">
-          {renderSection("Activities", activities, Calendar)}
-          {renderSection("Experiences", experiences, Briefcase)}
+          {renderTimeLine("Activities", activities, Calendar)}
+          {renderTimeLine("Experiences", experiences, Briefcase)}
         </div>
-        <div>{renderSection("Achievements", achievements, Trophy)}</div>
+        <div>{renderTimeLine("Achievements", achievements, Trophy)}</div>
       </div>
     </div>
   );

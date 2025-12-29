@@ -6,13 +6,13 @@ const navLinks = [
   },
   {
     id: 2,
-    name: "Contact",
-    type: "contact",
+    name: "Experiences",
+    type: "safari",
   },
   {
     id: 3,
-    name: "Experiences",
-    type: "safari",
+    name: "Contact",
+    type: "contact",
   },
 ];
 

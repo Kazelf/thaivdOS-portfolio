@@ -34,7 +34,7 @@ const Text = () => {
         {Array.isArray(description) && description.length > 0 ? (
           <div className="space-y-3 leading-relaxed">
             {description.map((para, i) => (
-              <p key={i}>{para}</p>
+              <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
             ))}
           </div>
         ) : null}

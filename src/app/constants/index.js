@@ -1,8 +1,8 @@
 import { navLinks } from "./navItems";
 export { navLinks };
 
-import { dockApps } from "./dockApps";
-export { dockApps };
+import { dockApps, screenApps } from "./appsList";
+export { dockApps, screenApps };
 
 import { socialLinks } from "./contactItems";
 export { socialLinks };
