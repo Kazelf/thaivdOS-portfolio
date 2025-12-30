@@ -15,8 +15,12 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata = {
+  verification: {
+    google: "1ZopRgwzU2_JK9VH8wg6Y9JabDzIUWPxcje5cPBVU8k",
+  },
   title: "Vũ Đình Thái",
-  description: "Thai Vu Portfolio",
+  description:
+    "Thai Vu - Backend Developer specializing in Node.js, Express.js, MongoDB",
 };
 
 export default function RootLayout({ children }) {
