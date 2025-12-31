@@ -40,7 +40,7 @@ const HomeScreen = () => {
   };
 
   const renderApps = (apps) => (
-    <ul>
+    <ul className="flex flex-col flex-wrap max-lg:flex-row">
       {apps.map((item) => (
         <li
           key={item.id}
@@ -56,9 +56,9 @@ const HomeScreen = () => {
 
   return (
     <section className="absolute w-full top-10 left-0 z-0 p-4 flex justify-between">
-      {renderApps(screenApps)}
+      <div>{renderApps(screenApps)}</div>
 
-      {renderApps(projects)}
+      <div className="max-lg:hidden">{renderApps(projects)}</div>
     </section>
   );
 };
