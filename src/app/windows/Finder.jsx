@@ -42,14 +42,14 @@ const Finder = () => {
   );
 
   return (
-    <div className="w-3xl max-lg:w-2xl window">
+    <div className="window w-3xl">
       <div className="window-header">
         <WindowControls target="finder" />
         <Search className="icon" />
       </div>
 
-      <div className="grid grid-cols-4 bg-base">
-        <div className="side-bar col-span-1 p-3 bg-base-200 border-r border-r-base-300">
+      <div className="grid grid-cols-4 max-lg:grid-cols-1 bg-base">
+        <div className="side-bar max-lg:hidden col-span-1 p-3 bg-base-200 border-r border-r-base-300">
           {renderList("Favourites", Object.values(locations))}
           {renderList("My Projects", locations.work.children)}
         </div>

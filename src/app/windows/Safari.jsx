@@ -85,7 +85,7 @@ const Safari = () => {
         </div>
       </div>
 
-      <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1">
+      <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-10">
           {renderTimeLine("Activities", activities, Calendar)}
           {renderTimeLine("Experiences", experiences, Briefcase)}
