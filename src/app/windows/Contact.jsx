@@ -29,7 +29,7 @@ const Contact = () => {
           vudinhthai081106@gmail.com
         </p>
 
-        <ul className="grid grid-cols-4 gap-2">
+        <ul className="grid grid-cols-4 max-md:grid-cols-1 gap-2">
           {socialLinks.map((item) => (
             <li
               className="p-2 col-span-1 rounded-lg transition-transform duration-200 ease-out hover:scale-105"

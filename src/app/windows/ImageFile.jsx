@@ -9,7 +9,15 @@ const ImageFile = () => {
   const { windows } = useWindowStore();
   const data = windows.imgfile?.data;
 
-  if (!data) return null;
+  if (!data) {
+    return (
+      <div className="window w-lg">
+        <div className="window-header">
+          <WindowControls target="imgfile" />
+        </div>
+      </div>
+    );
+  }
   const { name, image } = data;
 
   return (

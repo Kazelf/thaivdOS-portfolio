@@ -19,8 +19,11 @@ import {
 import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
 import { activities, experiences, achievements } from "../constants";
+import { useIsDesktop } from "../hooks";
 
 const Safari = () => {
+  const { isDesktopRaw, isDesktopSafe } = useIsDesktop();
+
   const renderTimeLine = (title, items, Icon) => (
     <div className="bg-base-200 p-2 rounded-2xl">
       <h2 className="font-bold text-xl mb-3">{title}</h2>
@@ -62,30 +65,35 @@ const Safari = () => {
     <div className="w-3xl max-sm:w-2xl window">
       <div className="window-header gap-4">
         <WindowControls target="safari" />
+        {isDesktopSafe ? (
+          <>
+            <PanelLeft className="icon ml-10" />
 
-        <PanelLeft className="icon ml-10" />
+            <div className="flex items-center">
+              <ChevronLeft className="icon" />
+              <ChevronRight className="icon" />
+            </div>
 
-        <div className="flex items-center">
-          <ChevronLeft className="icon" />
-          <ChevronRight className="icon" />
-        </div>
+            <div className="flex flex-1 p-1 bg-base rounded border border-base-300">
+              <Search className="icon" />
+              <input
+                type="text"
+                placeholder="Search or enter website name"
+                className="flex-1 font-normal"
+              />
+            </div>
 
-        <div className="flex flex-1 p-1 bg-base rounded border border-base-300">
-          <Search className="icon" />
-          <input
-            type="text"
-            placeholder="Search or enter website name"
-            className="flex-1 font-normal"
-          />
-        </div>
-
-        <div className="flex items-center ml-10 gap-5">
-          <Plus className="icon" />
-          <Copy className="icon" />
-        </div>
+            <div className="flex items-center ml-10 gap-5">
+              <Plus className="icon" />
+              <Copy className="icon" />
+            </div>
+          </>
+        ) : (
+          <p className="w-full">Experiences</p>
+        )}
       </div>
 
-      <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1">
+      <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-10">
           {renderTimeLine("Activities", activities, Calendar)}
           {renderTimeLine("Experiences", experiences, Briefcase)}

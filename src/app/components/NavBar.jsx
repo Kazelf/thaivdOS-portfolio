@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import dayjs from "dayjs";
-import { navLinks, navIcons } from "../constants";
+import { navLinks } from "../constants";
 import useWindowStore from "../store/window";
 import { Wifi, SlidersHorizontal, SquareCode } from "lucide-react";
 
@@ -10,7 +10,7 @@ const NavBar = () => {
   const { openWindow } = useWindowStore();
 
   return (
-    <nav className="bg-base-300/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0 z-10 ">
+    <nav className="bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0 z-10 ">
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         <SquareCode className="icon font-bold scale-120" />
         <p className={`text-lg font-bold`}>thaivdOS</p>

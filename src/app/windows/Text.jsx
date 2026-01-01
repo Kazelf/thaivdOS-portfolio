@@ -9,7 +9,15 @@ const Text = () => {
   const { windows } = useWindowStore();
   const data = windows.txtfile?.data;
 
-  if (!data) return null;
+  if (!data) {
+    return (
+      <div className="window w-lg">
+        <div className="window-header">
+          <WindowControls target="txtfile" />
+        </div>
+      </div>
+    );
+  }
   const { name, image, subtitle, description } = data;
 
   return (

@@ -13,12 +13,12 @@ const dockApps = [
     kind: "app",
     icon: "safari.svg",
   },
-  {
-    id: "photos",
-    name: "Gallery",
-    kind: "app",
-    icon: "photos.svg",
-  },
+  // {
+  //   id: "photos",
+  //   name: "Gallery",
+  //   kind: "app",
+  //   icon: "photos.svg",
+  // },
   {
     id: "contact",
     name: "Contact",
@@ -31,12 +31,12 @@ const dockApps = [
     kind: "app",
     icon: "terminal.svg",
   },
-  {
-    id: "trash",
-    name: "Archives",
-    kind: "app",
-    icon: "trash.svg",
-  },
+  // {
+  //   id: "trash",
+  //   name: "Archives",
+  //   kind: "app",
+  //   icon: "trash.svg",
+  // },
 ];
 
 const screenApps = [
@@ -54,16 +54,16 @@ const screenApps = [
     icon: "/icons/apps/safari.svg",
   },
   {
-    id: "contact",
-    name: "Contact",
-    kind: "app",
-    icon: "/icons/apps/contact.svg",
-  },
-  {
     id: "terminal",
     name: "Skills",
     kind: "app",
     icon: "/icons/apps/terminal.svg",
+  },
+  {
+    id: "contact",
+    name: "Contact",
+    kind: "app",
+    icon: "/icons/apps/contact.svg",
   },
 ];
 
