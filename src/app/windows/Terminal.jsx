@@ -20,16 +20,16 @@ const Terminal = () => {
         </div>
         <div className="grid grid-cols-12">
           <p className="col-start-2 col-span-3">Category</p>
-          <p>Technologies</p>
+          <p className="col-span-8">Technologies</p>
         </div>
-        <ul className="py-4 border-y border-dashed border-y-base-600">
+        <ul className="py-4 border-y border-dashed border-y-base-foreground">
           {techStack.map(({ category, items }) => (
             <li key={category} className="grid grid-cols-12 items-center">
               <CheckIcon className="col-span-1 text-green-700 size-4" />
               <h3 className="col-span-3 text-green-700 font-semibold">
                 {category}
               </h3>
-              <ul className="flex items-center gap-1">
+              <ul className="col-span-8 flex flex-wrap items-center gap-1">
                 {items.map((item, i) => (
                   <li key={i}>
                     {item}

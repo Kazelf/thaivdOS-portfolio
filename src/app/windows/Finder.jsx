@@ -71,7 +71,7 @@ const Finder = () => {
         </div>
 
         <div className="content p-4 col-span-3 ">
-          {!isDesktopRaw ? <Breadcrumb /> : null}
+          {!isDesktopSafe ? <Breadcrumb /> : null}
 
           <ul className="flex flex-wrap gap-4">
             {contentApps?.map((item) => (

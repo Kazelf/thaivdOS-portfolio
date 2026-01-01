@@ -12,7 +12,7 @@ export const useIsDesktop = () => {
 
   return {
     mounted,
-    isDesktopRaw, //UI
-    isDesktopSafe: mounted ? isDesktopRaw : true, //Data
+    isDesktopRaw, //UI on screen
+    isDesktopSafe: mounted ? isDesktopRaw : true, //Data && UI on windows
   };
 };
