@@ -2,19 +2,32 @@
 import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
+import { useMediaQuery } from "react-responsive";
 import WindowWrapper from "../hoc/WindowWrapper";
-import { WindowControls } from "../components";
+import { Breadcrumb, WindowControls } from "../components";
 import { Search } from "lucide-react";
 import { locations } from "../constants";
 import useLocationStore from "../store/location";
 import useWindowStore from "../store/window";
+import useFolderStore from "../store/folder";
 
 const Finder = () => {
   const { openWindow } = useWindowStore();
   const { activeLocation, setActiveLocation } = useLocationStore();
+  const { currentFolder, openFolder } = useFolderStore();
+
+  //Responsive
+  const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
+  const contentApps = isDesktop
+    ? activeLocation?.children
+    : currentFolder?.children;
+
   const openItem = (item) => {
     if (item.fileType === "pdf") return openWindow("resume");
-    if (item.kind === "folder") return setActiveLocation(item);
+    if (item.kind === "folder") {
+      openFolder(item);
+      return setActiveLocation(item);
+    }
     if (["fig", "url"].includes(item.fileType) && item.url)
       return window.open(item.url, "_blank");
 
@@ -54,18 +67,21 @@ const Finder = () => {
           {renderList("My Projects", locations.work.children)}
         </div>
 
-        <ul className="content col-span-3 p-4 flex flex-wrap gap-4 items-start">
-          {activeLocation?.children.map((item) => (
-            <li
-              key={item.id}
-              className="app-icon"
-              onClick={() => openItem(item)}
-            >
-              <Image src={item.icon} alt={item.name} width={60} height={60} />
-              <p className="text-center">{item.name}</p>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <Breadcrumb />
+          <ul className="content col-span-3 p-4 flex flex-wrap gap-4 items-start">
+            {contentApps?.map((item) => (
+              <li
+                key={item.id}
+                className="app-icon"
+                onClick={() => openItem(item)}
+              >
+                <Image src={item.icon} alt={item.name} width={60} height={60} />
+                <p className="text-center">{item.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

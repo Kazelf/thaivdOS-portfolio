@@ -55,7 +55,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <section className="absolute w-full top-10 left-0 z-0 p-4 flex justify-between">
+    <section className="absolute w-full top-10 left-0 z-0 max-lg:z-20 p-4 flex justify-between">
       <div>{renderApps(screenApps)}</div>
 
       <div className="max-lg:hidden">{renderApps(projects)}</div>
