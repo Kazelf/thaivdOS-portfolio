@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import dayjs from "dayjs";
-import { navLinks, navIcons } from "../constants";
+import { navLinks } from "../constants";
 import useWindowStore from "../store/window";
 import { Wifi, SlidersHorizontal, SquareCode } from "lucide-react";
 

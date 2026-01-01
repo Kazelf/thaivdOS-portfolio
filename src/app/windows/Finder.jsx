@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { useMediaQuery } from "react-responsive";
 import WindowWrapper from "../hoc/WindowWrapper";
 import { Breadcrumb, WindowControls } from "../components";
 import { Search } from "lucide-react";
@@ -10,6 +9,7 @@ import { locations } from "../constants";
 import useLocationStore from "../store/location";
 import useWindowStore from "../store/window";
 import useFolderStore from "../store/folder";
+import { useIsDesktop } from "../hooks";
 
 const Finder = () => {
   const { openWindow } = useWindowStore();
@@ -17,10 +17,13 @@ const Finder = () => {
   const { currentFolder, openFolder } = useFolderStore();
 
   //Responsive
-  const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
-  const contentApps = isDesktop
+  const { isDesktopRaw, isDesktopSafe } = useIsDesktop();
+  const contentApps = isDesktopSafe
     ? activeLocation?.children
     : currentFolder?.children;
+
+  const canGoBack =
+    !isDesktopRaw && currentFolder && currentFolder.id !== "root";
 
   const openItem = (item) => {
     if (item.fileType === "pdf") return openWindow("resume");
@@ -57,7 +60,7 @@ const Finder = () => {
   return (
     <div className="window w-3xl">
       <div className="window-header">
-        <WindowControls target="finder" />
+        <WindowControls target="finder" canGoBack={canGoBack} />
         <Search className="icon" />
       </div>
 
@@ -67,9 +70,10 @@ const Finder = () => {
           {renderList("My Projects", locations.work.children)}
         </div>
 
-        <div>
-          <Breadcrumb />
-          <ul className="content col-span-3 p-4 flex flex-wrap gap-4 items-start">
+        <div className="content p-4 col-span-3 ">
+          {!isDesktopRaw ? <Breadcrumb /> : null}
+
+          <ul className="flex flex-wrap gap-4">
             {contentApps?.map((item) => (
               <li
                 key={item.id}
