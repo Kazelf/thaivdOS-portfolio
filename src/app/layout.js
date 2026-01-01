@@ -1,4 +1,5 @@
 import { Georama, Roboto_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "react-vertical-timeline-component/style.min.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         className={`${georama.variable} ${robotoMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
