@@ -12,7 +12,7 @@ const WindowControls = ({ target, canGoBack = false }) => {
   return (
     <div className="flex gap-2">
       <button
-        onClick={() => closeWindow(target)}
+        onPointerUp={() => closeWindow(target)}
         className="p-1 cursor-pointer rounded-md hover:bg-red-400 hover:text-white"
         aria-label="Close"
       >
@@ -21,7 +21,7 @@ const WindowControls = ({ target, canGoBack = false }) => {
 
       {showGoBack ? (
         <button
-          onClick={() => goBack()}
+          onPointerUp={() => goBack()}
           className="p-1 cursor-pointer"
           aria-label="Go Back"
         >

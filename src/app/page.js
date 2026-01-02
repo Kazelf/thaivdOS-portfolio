@@ -1,4 +1,4 @@
-import { NavBar, HeroSection, Dock, HomeScreen } from "./components/";
+import { NavBar, WifiMenu, HeroSection, Dock, HomeScreen } from "./components/";
 import {
   Terminal,
   Resume,
@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <main className="h-dvh w-dvw overflow-hidden">
       <NavBar />
+      <WifiMenu />
       <HeroSection />
       <Dock />
       <HomeScreen />

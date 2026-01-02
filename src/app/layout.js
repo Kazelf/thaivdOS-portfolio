@@ -1,6 +1,6 @@
 import { Georama, Roboto_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import "./globals.css";
+import "./styles/globals.css";
 import "react-vertical-timeline-component/style.min.css";
 
 const georama = Georama({
