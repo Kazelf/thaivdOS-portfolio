@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import useSystemStore from "@/app/store/system";
 import { useClickOutside } from "@/app/hooks";
-import { Check } from "lucide-react";
 
 const WifiMenu = () => {
   const menuRef = useRef(null);
@@ -15,7 +14,7 @@ const WifiMenu = () => {
     <div
       ref={menuRef}
       onClick={(e) => e.stopPropagation()}
-      className="absolute top-12 right-20 z-50 w-xs rounded-xl bg-base/80 backdrop-blur-2xl shadow-lg p-3"
+      className="absolute top-12 right-2 z-50 w-xs rounded-xl bg-base/80 backdrop-blur-2xl shadow-lg p-3"
     >
       <div className="w-full flex justify-between items-center py-1">
         <p>Wi-Fi</p>

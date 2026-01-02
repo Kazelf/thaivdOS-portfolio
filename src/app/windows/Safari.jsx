@@ -20,9 +20,11 @@ import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
 import { activities, experiences, achievements } from "../constants";
 import { useIsDesktop } from "../hooks";
+import useSystemStore from "../store/system";
 
 const Safari = () => {
-  const { isDesktopRaw, isDesktopSafe } = useIsDesktop();
+  const { isDesktopSafe } = useIsDesktop();
+  const { wifi } = useSystemStore();
 
   const renderTimeLine = (title, items, Icon) => (
     <div className="bg-base-200 p-2 rounded-2xl">
@@ -62,7 +64,7 @@ const Safari = () => {
   );
 
   return (
-    <div className="w-3xl max-sm:w-2xl window">
+    <div className="w-3xl  h-[70vh] max-sm:w-2xl window">
       <div className="window-header gap-4">
         <WindowControls target="safari" />
         {isDesktopSafe ? (
@@ -94,11 +96,19 @@ const Safari = () => {
       </div>
 
       <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1 max-md:gap-10">
-        <div className="flex flex-col gap-10">
-          {renderTimeLine("Activities", activities, Calendar)}
-          {renderTimeLine("Experiences", experiences, Briefcase)}
-        </div>
-        <div>{renderTimeLine("Achievements", achievements, Trophy)}</div>
+        {wifi ? (
+          <>
+            <div className="flex flex-col gap-10">
+              {renderTimeLine("Activities", activities, Calendar)}
+              {renderTimeLine("Experiences", experiences, Briefcase)}
+            </div>
+            <div>{renderTimeLine("Achievements", achievements, Trophy)}</div>
+          </>
+        ) : (
+          <p className="m-auto text-2xl font-bold text-base-foreground/70">
+            You have no internet
+          </p>
+        )}
       </div>
     </div>
   );

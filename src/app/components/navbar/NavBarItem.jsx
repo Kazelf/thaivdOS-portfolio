@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuBarButton = ({ onClick, children }) => {
+const NavBarItem = ({ onClick, children }) => {
   return (
     <button
       onClick={(e) => {
@@ -13,4 +13,4 @@ const MenuBarButton = ({ onClick, children }) => {
   );
 };
 
-export default MenuBarButton;
+export default NavBarItem;
