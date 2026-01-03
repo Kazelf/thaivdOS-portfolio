@@ -11,8 +11,8 @@ const NavBarItem = ({ active, onClick, children }) => {
       className={clsx(
         "rounded-md",
         active
-          ? "bg-base-300 text-neutral-200"
-          : "hover:bg-base-300 hover:text-neutral-200"
+          ? "bg-neutral-300 text-neutral-foreground"
+          : "hover:bg-neutral-300 hover:text-neutral-foreground"
       )}
     >
       {children}

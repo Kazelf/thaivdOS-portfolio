@@ -7,6 +7,7 @@ import { useIsDesktop } from "@/app/hooks";
 import useWindowStore from "../../store/window";
 import useSystemStore from "../../store/system";
 import { Wifi, SquareCode, Settings2 } from "lucide-react";
+import SettingsMenu from "./SettingsMenu";
 
 const NavBar = () => {
   const wifiBtnRef = useRef(null);
@@ -47,9 +48,15 @@ const NavBar = () => {
         </NavBarItem>
         {activeMenu === "wifi" && <WifiMenu triggerRef={wifiBtnRef} />}
 
-        <NavBarItem onClick={() => toggleMenu("settings")}>
+        <NavBarItem
+          active={activeMenu === "settings"}
+          onClick={() => toggleMenu("settings")}
+        >
           <Settings2 ref={settingsBtnRef} className="icon" />
         </NavBarItem>
+        {activeMenu === "settings" && (
+          <SettingsMenu triggerRef={settingsBtnRef} />
+        )}
 
         <time className={`${pStyles} font-medium`}>
           {dayjs().format(timeFormat)}
