@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import clsx from "clsx";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -27,7 +28,7 @@ const Safari = () => {
   const { wifi } = useSystemStore();
 
   const renderTimeLine = (title, items, Icon) => (
-    <div className="bg-base-200 p-2 rounded-2xl">
+    <div className="bg-base p-2 rounded-2xl">
       <h2 className="font-bold text-xl mb-3">{title}</h2>
       <VerticalTimeline lineColor="var(--color-primary)" layout="1-column-left">
         {items.map(({ id, date, title, role, description }) => (
@@ -64,7 +65,7 @@ const Safari = () => {
   );
 
   return (
-    <div className="w-3xl  h-[70vh] max-sm:w-2xl window">
+    <div className="w-3xl h-[70vh] window">
       <div className="window-header gap-4">
         <WindowControls target="safari" />
         {isDesktopSafe ? (
@@ -76,7 +77,7 @@ const Safari = () => {
               <ChevronRight className="icon" />
             </div>
 
-            <div className="flex flex-1 p-1 bg-base rounded border border-base-300">
+            <div className="flex flex-1 p-1 bg-base-200 rounded border border-base-300">
               <Search className="icon" />
               <input
                 type="text"
@@ -95,7 +96,12 @@ const Safari = () => {
         )}
       </div>
 
-      <div className="window-content grid grid-cols-2 gap-3 max-md:grid-cols-1 max-md:gap-10">
+      <div
+        className={clsx(
+          "window-content grid gap-3 max-md:grid-cols-1 max-md:gap-10",
+          wifi && "grid-cols-2"
+        )}
+      >
         {wifi ? (
           <>
             <div className="flex flex-col gap-10">

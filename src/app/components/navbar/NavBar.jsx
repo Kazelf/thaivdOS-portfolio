@@ -1,17 +1,22 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import dayjs from "dayjs";
 import { navLinks } from "../../constants";
-import { NavBarItem } from "..";
+import { NavBarItem, WifiMenu } from "..";
+import { useIsDesktop } from "@/app/hooks";
 import useWindowStore from "../../store/window";
 import useSystemStore from "../../store/system";
 import { Wifi, SquareCode, Settings2 } from "lucide-react";
 
 const NavBar = () => {
+  const wifiBtnRef = useRef(null);
+  const settingsBtnRef = useRef(null);
+  const { isDesktopSafe } = useIsDesktop();
+  const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "h:mm";
+
   const pStyles = "text-sm transition-all";
   const { openWindow } = useWindowStore();
   const { toggleMenu, activeMenu } = useSystemStore();
-  console.log(activeMenu);
 
   return (
     <nav className="bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0 z-100 ">
@@ -34,16 +39,20 @@ const NavBar = () => {
       </div>
 
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
-        <NavBarItem onClick={() => toggleMenu("wifi")}>
-          <Wifi className="icon" />
+        <NavBarItem
+          active={activeMenu === "wifi"}
+          onClick={() => toggleMenu("wifi")}
+        >
+          <Wifi ref={wifiBtnRef} className="icon" />
         </NavBarItem>
+        {activeMenu === "wifi" && <WifiMenu triggerRef={wifiBtnRef} />}
 
         <NavBarItem onClick={() => toggleMenu("settings")}>
-          <Settings2 className="icon" />
+          <Settings2 ref={settingsBtnRef} className="icon" />
         </NavBarItem>
 
-        <time className={`${pStyles}`}>
-          {dayjs().format("ddd MMM D h:mm A")}
+        <time className={`${pStyles} font-medium`}>
+          {dayjs().format(timeFormat)}
         </time>
       </div>
     </nav>
