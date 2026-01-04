@@ -2,12 +2,11 @@
 import React, { useRef } from "react";
 import dayjs from "dayjs";
 import { navLinks } from "../../constants";
-import { NavBarItem, WifiMenu } from "..";
+import { NavBarItem, WifiMenu, SettingsMenu } from "..";
 import { useIsDesktop } from "@/app/hooks";
 import useWindowStore from "../../store/window";
 import useSystemStore from "../../store/system";
 import { Wifi, SquareCode, Settings2 } from "lucide-react";
-import SettingsMenu from "./SettingsMenu";
 
 const NavBar = () => {
   const wifiBtnRef = useRef(null);
