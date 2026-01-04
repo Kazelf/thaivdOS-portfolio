@@ -4,7 +4,6 @@ import Image from "next/image";
 import { locations, screenApps } from "../constants";
 import useLocationStore from "../store/location";
 import useWindowStore from "../store/window";
-import { useGSAP, Draggable } from "@/lib/gsapClient";
 
 const projects = locations.work?.children ?? [];
 

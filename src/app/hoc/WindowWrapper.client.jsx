@@ -2,11 +2,13 @@
 import React, { useLayoutEffect, useRef } from "react";
 import useWindowStore from "../store/window";
 import { gsap, useGSAP, Draggable } from "@/lib/gsapClient";
+import { useIsDesktop } from "../hooks";
 
 const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
   const { focusWindow, windows } = useWindowStore();
   const { isOpen, zIndex, data } = windows[windowKey];
   const ref = useRef(null);
+  const { isDesktopSafe } = useIsDesktop();
 
   useGSAP(() => {
     const el = ref.current;
@@ -25,15 +27,21 @@ const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
     const el = ref.current;
     if (!el) return;
 
+    Draggable.get(el)?.kill();
+    if (!isDesktopSafe) return;
+
+    const header = el.querySelector(".window-header");
+    if (!header) return;
+
     const [instance] = Draggable.create(el, {
-      trigger: el.querySelector(".window-header"),
+      trigger: header,
       onPress: () => {
         focusWindow(windowKey);
       },
     });
 
     return () => instance.kill();
-  }, [data]);
+  }, [isDesktopSafe, data]);
 
   useLayoutEffect(() => {
     const el = ref.current;

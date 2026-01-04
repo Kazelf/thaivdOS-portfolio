@@ -24,10 +24,10 @@ const ImageFile = () => {
     <div className="window w-lg">
       <div className="window-header">
         <WindowControls target="imgfile" />
-        <h2>{name}</h2>
+        <h2 className="w-full">{name}</h2>
       </div>
 
-      <div className="bg-base p-4">
+      <div className="p-4">
         <div className="relative w-full h-96">
           {image && (
             <Image src={image} alt={name} fill className="object-contain" />
