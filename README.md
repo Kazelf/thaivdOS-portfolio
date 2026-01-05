@@ -1,37 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# macOS Portfolio 💻
 
-## Getting Started
+My personal portfolio stimulating macOS: https://thaivd.vercel.app.
 
-First, run the development server:
+Built with **Next.js**, **Tailwind CSS**, and **GSAP**.  
+
+<img width="1024" height="648" alt="thaivdOS Portfolio" src="https://github.com/user-attachments/assets/b88251fe-3c6b-4912-9777-d414315432fa" />
+
+
+## ✨ Features
+
+- 🖥️ macOS-style desktop interface
+- 🪟 Draggable, focusable windows with z-index management
+- 🎯 Dock system with app launching behavior
+- 🌗 Dark / Light mode (system-aware)
+- 🎞️ Smooth animations using GSAP
+- 📱 Responsive & mobile-friendly
+- ⚡ Optimized performance
+
+## 🛠 Tech Stack
+
+- **Framework:** Next.js
+- **Styling:** Tailwind CSS
+- **Animation:** GSAP
+- **State Management:** Zustand
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/
+│   ├── components/     # UI components (Dock, Menu, Screen etc.)
+│   ├── constants/      # App & system constants
+│   ├── hoc/            # High Order Components
+│   ├── hooks/          # Custom hooks
+│   ├── store/          # Zustand stores
+│   ├── styles/         # Styles with CSS and Tailwind
+│   ├── windows/        # App windows content
+│   └── layout.js
+├── lib/
+│   └── gsapClient.js   # GSAP setup
+public/
+└── assets/             # Icons, images, mock files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Clone the repository
+2. Install dependencies
+```bash
+npm install
+```
+3. Run development server
+```bash
+npm run dev
+```
+## Change Logs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **2026.01.04**: Add dark theme.
+- **2026.01.02**: Add features: wifi, settings.
+- **2026.01.01**: Add mobile version.
 
-## Learn More
+## Credits
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# thaivdOS-portfolio" 
+- [Javascript Mastery Youtube Channel](https://www.youtube.com/watch?v=j9ZD_hlyHOA&t=133s)
+- [Figma macOS 26 Library - UI Kits](https://www.figma.com/community/file/1543337041090580818)
