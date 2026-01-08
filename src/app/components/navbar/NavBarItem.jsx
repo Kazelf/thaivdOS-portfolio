@@ -1,13 +1,14 @@
 import React from "react";
 import clsx from "clsx";
 
-const NavBarItem = ({ active, onClick, children }) => {
+const NavBarItem = ({ name, active, onClick, children }) => {
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
         onClick();
       }}
+      aria-label={name}
       className={clsx(
         "rounded-md",
         active

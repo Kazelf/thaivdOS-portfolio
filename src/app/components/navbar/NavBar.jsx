@@ -5,18 +5,18 @@ import { navLinks } from "../../constants";
 import { NavBarItem, WifiMenu, SettingsMenu } from "..";
 import { useIsDesktop } from "@/app/hooks";
 import useWindowStore from "../../store/window";
-import useSystemStore from "../../store/system";
+import useSettingsStore from "../../store/settings";
 import { Wifi, SquareCode, Settings2 } from "lucide-react";
 
 const NavBar = () => {
   const wifiBtnRef = useRef(null);
   const settingsBtnRef = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
-  const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "h:mm";
+  const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "H:mm";
 
   const pStyles = "text-sm transition-all";
   const { openWindow } = useWindowStore();
-  const { toggleMenu, activeMenu } = useSystemStore();
+  const { toggleMenu, activeMenu } = useSettingsStore();
 
   return (
     <nav className="bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0 z-100 ">
@@ -40,6 +40,7 @@ const NavBar = () => {
 
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         <NavBarItem
+          name={"wifi"}
           active={activeMenu === "wifi"}
           onClick={() => toggleMenu("wifi")}
         >
@@ -48,6 +49,7 @@ const NavBar = () => {
         {activeMenu === "wifi" && <WifiMenu triggerRef={wifiBtnRef} />}
 
         <NavBarItem
+          name={"settings"}
           active={activeMenu === "settings"}
           onClick={() => toggleMenu("settings")}
         >

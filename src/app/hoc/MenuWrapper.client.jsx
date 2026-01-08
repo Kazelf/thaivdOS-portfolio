@@ -1,12 +1,12 @@
 "use client";
 import React, { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsapClient";
-import useSystemStore from "../store/system";
+import useSettingsStore from "../store/settings";
 import { useClickOutside } from "../hooks";
 
 const MenuWrapperClient = ({ Component, menuKey, triggerRef, ...props }) => {
   const menuRef = useRef(null);
-  const { activeMenu, closeMenu } = useSystemStore();
+  const { activeMenu, closeMenu } = useSettingsStore();
 
   useClickOutside(menuRef, closeMenu, [triggerRef]);
 

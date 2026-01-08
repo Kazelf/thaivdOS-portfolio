@@ -1,29 +1,14 @@
-import { NavBar, HeroSection, Dock, HomeScreen } from "./components/";
-import {
-  Terminal,
-  Resume,
-  Finder,
-  Contact,
-  Text,
-  ImageWindow,
-  Safari,
-} from "./windows";
+"use client";
+import Desktop from "./pages/Desktop";
+import Login from "./pages/Login";
+import useSystemStore from "./store/system";
 
 export default function Home() {
+  const { login, setLogin } = useSystemStore();
+
   return (
     <main className="h-dvh w-dvw overflow-hidden">
-      <NavBar />
-      <HeroSection />
-      <Dock />
-      <HomeScreen />
-
-      <Terminal />
-      <Resume />
-      <Finder />
-      <Safari />
-      <Contact />
-      <Text />
-      <ImageWindow />
+      {login ? <Desktop /> : <Login setLogin={() => setLogin(true)} />}
     </main>
   );
 }
