@@ -2,10 +2,10 @@
 import React from "react";
 import { Check } from "lucide-react";
 import MenuWrapper from "@/app/hoc/MenuWrapper";
-import useSettingsStore from "@/app/store/settings";
+import useSystemStore from "@/app/store/system";
 
 const WifiMenu = () => {
-  const { wifi, toggleWifi } = useSettingsStore();
+  const { wifi, toggleWifi } = useSystemStore();
 
   return (
     <>

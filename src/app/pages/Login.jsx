@@ -28,14 +28,14 @@ const Login = ({ setLogin }) => {
     gsap.to(".login-blur", {
       backdropFilter: "blur(0px)",
       opacity: 0,
-      duration: 0.8,
+      duration: 0.3,
       ease: "power3.inOut",
     });
 
     gsap.to(".login-content", {
       scale: 1.1,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.3,
       ease: "power3.inOut",
       onComplete: setLogin,
     });

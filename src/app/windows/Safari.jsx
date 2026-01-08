@@ -21,11 +21,11 @@ import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
 import { activities, experiences, achievements } from "../constants";
 import { useIsDesktop } from "../hooks";
-import useSettingsStore from "../store/settings";
+import useSystemStore from "../store/system";
 
 const Safari = () => {
   const { isDesktopSafe } = useIsDesktop();
-  const { wifi } = useSettingsStore();
+  const { wifi } = useSystemStore();
 
   const renderTimeLine = (title, items, Icon) => (
     <div className="bg-base p-2 rounded-2xl">
