@@ -1,6 +1,7 @@
 import { Georama, Roboto_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./styles/globals.css";
 import "react-vertical-timeline-component/style.min.css";
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
           {children}
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
