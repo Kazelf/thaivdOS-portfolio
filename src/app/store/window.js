@@ -33,6 +33,11 @@ const useWindowStore = create(
         win.zIndex = state.nextZIndex;
         state.nextZIndex++;
       }),
+
+    resetAllWindows: () =>
+      set((state) => {
+        state.windows = WINDOW_CONFIG;
+      }),
   }))
 );
 

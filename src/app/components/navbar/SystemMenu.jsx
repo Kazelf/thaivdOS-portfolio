@@ -1,9 +1,11 @@
 import React from "react";
-import { useSystemStore } from "@/app/store";
+import { useSystemStore, useWindowStore } from "@/app/store";
 import MenuWrapper from "@/app/hoc/MenuWrapper";
 
 const SystemMenu = () => {
   const { setLogin, closeMenu } = useSystemStore();
+  const { resetAllWindows } = useWindowStore();
+
   return (
     <>
       <div className="w-full flex justify-between items-center py-1">
@@ -11,6 +13,7 @@ const SystemMenu = () => {
           onClick={(e) => {
             e.stopPropagation();
             closeMenu();
+            resetAllWindows();
             setLogin(false);
           }}
           aria-label={"lock"}
