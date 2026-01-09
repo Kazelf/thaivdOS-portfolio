@@ -2,17 +2,17 @@
 import React, { useRef } from "react";
 import dayjs from "dayjs";
 import { navLinks } from "../../constants";
-import { NavBarItem, WifiMenu, SettingsMenu } from "..";
+import { NavBarItem, WifiMenu, SettingsMenu, SystemMenu } from "..";
 import { useIsDesktop } from "@/app/hooks";
-import useWindowStore from "../../store/window";
-import useSystemStore from "../../store/system";
+import { useSystemStore, useWindowStore } from "@/app/store";
 import { Wifi, SquareCode, Settings2 } from "lucide-react";
 
 const NavBar = () => {
   const wifiBtnRef = useRef(null);
   const settingsBtnRef = useRef(null);
+  const systemBtnRef = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
-  const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "h:mm";
+  const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "H:mm";
 
   const pStyles = "text-sm transition-all";
   const { openWindow } = useWindowStore();
@@ -21,7 +21,20 @@ const NavBar = () => {
   return (
     <nav className="bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0 z-100 ">
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
-        <SquareCode className="icon font-bold scale-120" />
+        <NavBarItem
+          name={"system"}
+          active={activeMenu === "system"}
+          onClick={() => toggleMenu("system")}
+        >
+          <SquareCode ref={systemBtnRef} className="icon font-bold scale-120" />
+        </NavBarItem>
+        {activeMenu === "system" && (
+          <SystemMenu
+            triggerRef={systemBtnRef}
+            menuPosition={"top-12 left-2 w-3xs"}
+          />
+        )}
+
         <p className={`text-lg font-bold`}>thaivdOS</p>
 
         <ul className="flex items-center gap-5 max-sm:hidden">
@@ -40,21 +53,31 @@ const NavBar = () => {
 
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         <NavBarItem
+          name={"wifi"}
           active={activeMenu === "wifi"}
           onClick={() => toggleMenu("wifi")}
         >
           <Wifi ref={wifiBtnRef} className="icon" />
         </NavBarItem>
-        {activeMenu === "wifi" && <WifiMenu triggerRef={wifiBtnRef} />}
+        {activeMenu === "wifi" && (
+          <WifiMenu
+            triggerRef={wifiBtnRef}
+            menuPosition={"top-12 right-2 w-xs"}
+          />
+        )}
 
         <NavBarItem
+          name={"settings"}
           active={activeMenu === "settings"}
           onClick={() => toggleMenu("settings")}
         >
           <Settings2 ref={settingsBtnRef} className="icon" />
         </NavBarItem>
         {activeMenu === "settings" && (
-          <SettingsMenu triggerRef={settingsBtnRef} />
+          <SettingsMenu
+            triggerRef={settingsBtnRef}
+            menuPosition={"top-12 right-2 w-xs"}
+          />
         )}
 
         <time className={`${pStyles} font-medium`}>

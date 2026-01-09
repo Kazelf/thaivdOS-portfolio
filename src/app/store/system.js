@@ -3,8 +3,14 @@ import { immer } from "zustand/middleware/immer";
 
 const useSystemStore = create(
   immer((set) => ({
-    activeMenu: null, //"wifi" | "settings" | null
+    login: false,
+    activeMenu: null, //"wifi" | "settings" | "system" | null
     wifi: true,
+
+    setLogin: (login) =>
+      set((state) => {
+        state.login = login;
+      }),
 
     toggleMenu: (menu) =>
       set((state) => {

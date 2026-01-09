@@ -169,6 +169,14 @@ const ABOUT_LOCATION = {
       fileType: "img",
       image: "/images/thai.png",
     },
+    {
+      id: 3,
+      name: "excellentStd.png",
+      icon: "/icons/finder/png.svg",
+      kind: "file",
+      fileType: "img",
+      image: "/images/ExcellentStudent.JPG",
+    },
   ],
 };
 
