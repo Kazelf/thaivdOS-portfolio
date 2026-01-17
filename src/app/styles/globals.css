@@ -15,7 +15,8 @@ body {
   height: 100dvh;
   overflow: hidden;
 
-  background-image: linear-gradient(var(--blur-bg), var(--blur-bg)),
+  background-image:
+    linear-gradient(var(--blur-bg), var(--blur-bg)),
     url("/images/wallpaper.png");
 
   background-blend-mode: darken;
@@ -146,7 +147,7 @@ body {
     }
 
     .active {
-      @apply bg-blue-200 text-blue-600;
+      @apply bg-primary/30 text-primary-foreground;
     }
 
     .not-active {

@@ -8,6 +8,7 @@ import {
   Text,
   ImageWindow,
   Safari,
+  Spotify,
 } from "../windows";
 
 const Desktop = () => {
@@ -23,6 +24,7 @@ const Desktop = () => {
       <Finder />
       <Safari />
       <Contact />
+      <Spotify />
       <Text />
       <ImageWindow />
     </>
