@@ -3,7 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { locations, musics } from "../constants";
 
 const DEFAULT_LOCATION = locations.work;
-const DEFAULT_CATEGORY = musics.favourites;
+const DEFAULT_CATEGORY = musics.all;
 const DEFAULT_SONG = musics.favourites.children[0];
 
 const useLocationStore = create(

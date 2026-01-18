@@ -1,7 +1,7 @@
 const FAVOURITES_CATEGORY = {
   id: 1,
   name: "Favourites",
-  image: "/icons/apps/spotify.svg",
+  image: "/icons/spotify/favourites.svg",
   children: [
     {
       id: 1,
@@ -23,7 +23,7 @@ const FAVOURITES_CATEGORY = {
 const VIETNAMESE_CATEGORY = {
   id: 2,
   name: "Vietnamese",
-  image: "/icons/apps/spotify.svg",
+  image: "/icons/spotify/vietnamese.png",
   children: [
     {
       id: 10,
@@ -45,7 +45,7 @@ const VIETNAMESE_CATEGORY = {
 const PIXEL_CATEGORY = {
   id: 3,
   name: "Pixel",
-  image: "/icons/apps/spotify.svg",
+  image: "/icons/spotify/pixel.svg",
   children: [
     {
       id: 20,
@@ -73,7 +73,7 @@ const categories = {
 const ALL_CATEGORY = {
   id: 0,
   name: "All",
-  image: "/icons/apps/spotify.svg",
+  image: "/icons/spotify/all.svg",
   children: Object.values(categories).flatMap((category) =>
     category.children.map((song) => ({
       ...song,

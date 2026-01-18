@@ -3,12 +3,16 @@ import React, { useRef } from "react";
 import { Tooltip } from "react-tooltip";
 import { gsap, useGSAP } from "@/lib/gsapClient";
 
+import { useIsDesktop } from "../hooks";
 import { dockApps } from "../constants";
 import useWindowStore from "../store/window";
 
 const Dock = () => {
   const { openWindow, closeWindow, windows } = useWindowStore();
+  const { isDesktopSafe } = useIsDesktop();
   const dockRef = useRef(null);
+
+  const visibleDockApps = isDesktopSafe ? dockApps : dockApps.slice(0, 4);
 
   useGSAP(() => {
     const dock = dockRef.current;
@@ -82,7 +86,7 @@ const Dock = () => {
         ref={dockRef}
         className="dock-container bg-white/20 backdrop-blur-md flex justify-between items-end rounded-2xl p-1.5 gap-1.5"
       >
-        {dockApps.map(({ id, name, icon }) => (
+        {visibleDockApps.map(({ id, name, icon }) => (
           <div key={id} className="relative flex justify-center">
             <button
               type="button"

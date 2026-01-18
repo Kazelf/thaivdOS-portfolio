@@ -19,7 +19,7 @@ const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
     gsap.fromTo(
       el,
       { scale: 0.8, opacity: 0, y: 40 },
-      { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
+      { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
     );
   }, [isOpen]);
 
@@ -55,7 +55,7 @@ const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
       id={windowKey}
       ref={ref}
       style={{ zIndex }}
-      className="absolute top-0 lg:top-1/6 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden"
+      className="absolute top-0 lg:top-1/12 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden"
     >
       <Component {...props} />
     </section>

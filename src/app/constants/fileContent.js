@@ -1,3 +1,4 @@
+//color folder icon: #0069ff
 const WORK_LOCATION = {
   id: 1,
   type: "work",

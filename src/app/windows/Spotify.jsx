@@ -17,6 +17,7 @@ const Spotify = () => {
   const { musicCategory, setMusicCategory, activeSong, setActiveSong } =
     useLocationStore();
 
+  //hanle play button
   const handlePlayButton = () => {
     if (!audioRef.current) return;
 
@@ -29,6 +30,7 @@ const Spotify = () => {
     }
   };
 
+  //handle audio progress bar
   const handleProgressBar = (e) => {
     const time = Number(e.target.value);
     audioRef.current.play();
@@ -37,7 +39,7 @@ const Spotify = () => {
     setCurrentTime(time);
   };
 
-  //handle auto play song
+  //handle auto play song when open
   useEffect(() => {
     if (!audioRef.current || (activeSong.id === 1 && !isPlaying)) return;
 
@@ -45,6 +47,20 @@ const Spotify = () => {
     audioRef.current.play();
     setIsPlaying(true);
   }, [activeSong]);
+
+  //handle prev/next song
+  const allSongs = musics.all.children;
+  const currentIndex = allSongs.findIndex((song) => song.id === activeSong.id);
+
+  const handleNext = () => {
+    const nextIndex = (currentIndex + 1) % allSongs.length;
+    setActiveSong(allSongs[nextIndex]);
+  };
+
+  const handlePrev = () => {
+    const prevIndex = (currentIndex - 1 + allSongs.length) % allSongs.length;
+    setActiveSong(allSongs[prevIndex]);
+  };
 
   const renderList = (items, activeItem, setActiveItem) => (
     <>
@@ -132,7 +148,7 @@ const Spotify = () => {
               />
 
               <div className="flex justify-around w-full">
-                <button aria-label="Prev" onClick={() => {}}>
+                <button aria-label="Prev" onClick={handlePrev}>
                   <SkipBack />
                 </button>
 
@@ -144,7 +160,7 @@ const Spotify = () => {
                   {isPlaying ? <Pause /> : <Play />}
                 </button>
 
-                <button aria-label="Next" onClick={() => {}}>
+                <button aria-label="Next" onClick={handleNext}>
                   <SkipForward />
                 </button>
               </div>
@@ -158,6 +174,7 @@ const Spotify = () => {
                 onTimeUpdate={() =>
                   setCurrentTime(audioRef.current.currentTime)
                 }
+                loop
               />
             </>
           ) : (
