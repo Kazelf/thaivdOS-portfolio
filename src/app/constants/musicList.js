@@ -1,27 +1,29 @@
 const FAVOURITES_CATEGORY = {
   id: 1,
   name: "Favourites",
-  icon: "/icons/apps/spotify.svg",
+  image: "/icons/apps/spotify.svg",
   children: [
     {
       id: 1,
       name: "Nature",
       author: "NikitaKondrashev",
-      icon: "/images/spotify/nature.jpg",
+      image: "/images/spotify/nature.jpg",
+      music: "/musics/nature.mp3",
     },
   ],
 };
 
 const VIETNAMESE_CATEGORY = {
   id: 2,
-  name: "Vietnamese Songs",
-  icon: "/icons/apps/spotify.svg",
+  name: "Vietnamese",
+  image: "/icons/apps/spotify.svg",
   children: [
     {
-      id: 1,
-      name: "Nature",
+      id: 2,
+      name: "Vi sao khong phai a",
       author: "NikitaKondrashev",
-      icon: "/images/spotify/nature.jpg",
+      image: "/images/spotify/nature.jpg",
+      music: "/musics/nature.mp3",
     },
   ],
 };
@@ -29,13 +31,21 @@ const VIETNAMESE_CATEGORY = {
 const KPOP_CATEGORY = {
   id: 3,
   name: "K-POP",
-  icon: "/icons/apps/spotify.svg",
+  image: "/icons/apps/spotify.svg",
   children: [
     {
-      id: 1,
-      name: "Nature",
+      id: 3,
+      name: "golden",
       author: "NikitaKondrashev",
-      icon: "/images/spotify/nature.jpg",
+      image: "/images/spotify/nature.jpg",
+      music: "/musics/nature.mp3",
+    },
+    {
+      id: 4,
+      name: "ditto",
+      author: "NikitaKondrashev",
+      image: "/images/spotify/nature.jpg",
+      music: "/musics/nature.mp3",
     },
   ],
 };

@@ -134,26 +134,20 @@ body {
   @apply p-4 flex-1 min-h-0 overflow-y-auto;
 }
 
-.side-bar {
-  div {
-    h3 {
-      @apply text-xs font-medium mb-2;
-    }
+.side-bar h3 {
+  @apply text-xs font-medium mb-2;
+}
 
-    ul {
-      li {
-        @apply flex items-center gap-2 p-2 rounded-lg mx-3 mb-1 cursor-pointer;
-      }
-    }
+.side-bar ul li {
+  @apply flex items-center gap-2 p-2 rounded-lg mx-3 mb-1 cursor-pointer;
+}
 
-    .active {
-      @apply bg-primary/30 text-primary-foreground;
-    }
+.side-bar ul li.active {
+  @apply bg-primary/30 text-primary-foreground;
+}
 
-    .not-active {
-      @apply hover:bg-base-300;
-    }
-  }
+.side-bar ul li.not-active {
+  @apply hover:bg-base-300;
 }
 
 .app-icon {

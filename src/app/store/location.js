@@ -4,11 +4,19 @@ import { locations, musics } from "../constants";
 
 const DEFAULT_LOCATION = locations.work;
 const DEFAULT_CATEGORY = musics.favourites;
+const DEFAULT_SONG = {
+  id: 0,
+  name: "",
+  author: "",
+  icon: "",
+  music: "",
+};
 
 const useLocationStore = create(
   immer((set) => ({
     activeLocation: DEFAULT_LOCATION,
     musicCategory: DEFAULT_CATEGORY,
+    activeSong: DEFAULT_SONG,
 
     setActiveLocation: (location) =>
       set((state) => {
@@ -30,6 +38,17 @@ const useLocationStore = create(
     resetMusicCategory: () =>
       set((state) => {
         state.musicCategory = DEFAULT_CATEGORY;
+      }),
+
+    setActiveSong: (song) =>
+      set((state) => {
+        if (!song) return;
+        state.activeSong = song;
+      }),
+
+    resetActiveSong: () =>
+      set((state) => {
+        state.activeSong = DEFAULT_SONG;
       }),
   })),
 );
