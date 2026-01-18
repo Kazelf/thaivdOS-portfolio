@@ -167,3 +167,30 @@ body {
   font-weight: normal !important;
   margin-top: 0 !important;
 }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: rotate 30s linear infinite;
+  animation-play-state: running;
+}
+
+.spin-paused {
+  animation-play-state: paused;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

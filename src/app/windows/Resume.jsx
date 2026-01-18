@@ -1,6 +1,4 @@
-"use client";
 import React from "react";
-
 import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
 import { SquareArrowOutUpRightIcon } from "lucide-react";

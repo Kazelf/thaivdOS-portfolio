@@ -19,5 +19,5 @@ export { locations };
 import { WINDOW_CONFIG, INITIAL_Z_INDEX } from "./windowsConfig";
 export { WINDOW_CONFIG, INITIAL_Z_INDEX };
 
-import { musics } from "./musicList";
+import { musics } from "./musicsList";
 export { musics };

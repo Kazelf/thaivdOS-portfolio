@@ -4,13 +4,7 @@ import { locations, musics } from "../constants";
 
 const DEFAULT_LOCATION = locations.work;
 const DEFAULT_CATEGORY = musics.favourites;
-const DEFAULT_SONG = {
-  id: 0,
-  name: "",
-  author: "",
-  icon: "",
-  music: "",
-};
+const DEFAULT_SONG = musics.favourites.children[0];
 
 const useLocationStore = create(
   immer((set) => ({

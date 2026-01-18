@@ -29,9 +29,17 @@ const Spotify = () => {
     }
   };
 
+  const handleProgressBar = (e) => {
+    const time = Number(e.target.value);
+    audioRef.current.play();
+    setIsPlaying(true);
+    audioRef.current.currentTime = time;
+    setCurrentTime(time);
+  };
+
   //handle auto play song
   useEffect(() => {
-    if (!audioRef.current || activeSong.id === 0) return;
+    if (!audioRef.current || (activeSong.id === 1 && !isPlaying)) return;
 
     audioRef.current.load();
     audioRef.current.play();
@@ -46,11 +54,23 @@ const Spotify = () => {
             key={item.id}
             onClick={() => setActiveItem(item)}
             className={clsx(
+              "h-10",
               item.id === activeItem.id ? "active" : "not-active",
             )}
           >
-            <Image src={item.image} alt={item.name} width={16} height={16} />
-            <p className="text-sm font-medium truncate">{item.name}</p>
+            <img
+              src={item.image}
+              alt={item.name}
+              className="h-full rounded-sm"
+            />
+            <div>
+              <p className="text-sm font-medium truncate">{item.name}</p>
+              {item.author ? (
+                <p className="text-xs truncate">{item.author}</p>
+              ) : (
+                <></>
+              )}
+            </div>
           </li>
         ))}
       </ul>
@@ -64,13 +84,24 @@ const Spotify = () => {
         <h2 className="w-full">Spotify</h2>
       </div>
 
-      <div className="p-0 space-y-5 grid grid-cols-12 h-full">
+      <div className="p-0 space-y-5 grid grid-cols-12 h-full min-h-0">
         <div className="side-bar h-full max-lg:hidden col-span-3 p-3 bg-base border-r border-r-base-300">
           <h3>Categories</h3>
           {renderList(Object.values(musics), musicCategory, setMusicCategory)}
         </div>
 
-        <div className="side-bar col-span-5 p-3">
+        <div className="side-bar flex-1 min-h-0 overflow-y-auto col-span-5 p-3 no-scrollbar">
+          <div className="flex">
+            <Image
+              src={musicCategory.image}
+              alt={musicCategory.name}
+              width={24}
+              height={24}
+            />
+            <p className="ml-4 font-medium truncate">{musicCategory.name}</p>
+          </div>
+          <hr className="my-4 opacity-20" />
+          <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>
           {renderList(musicCategory?.children, activeSong, setActiveSong)}
         </div>
 
@@ -79,10 +110,16 @@ const Spotify = () => {
             <>
               <img
                 src={activeSong.image}
-                className="w-full rounded-full shadow-lg mb-3 p-2"
+                alt={activeSong.name}
+                className={clsx(
+                  "w-full rounded-full shadow-lg mb-3 p-2",
+                  isPlaying ? "spin" : "spin-paused",
+                )}
               />
-              <h3 className="font-semibold">{activeSong.name}</h3>
-              <p className="text-sm">{activeSong.author}</p>
+              <h3 className="font-semibold text-shadow-2xs">
+                {activeSong.name}
+              </h3>
+              <p className="text-sm text-shadow-2xs">{activeSong.author}</p>
 
               <input
                 type="range"
@@ -90,13 +127,7 @@ const Spotify = () => {
                 max={duration}
                 value={currentTime}
                 step={0.1}
-                onChange={(e) => {
-                  const time = Number(e.target.value);
-                  audioRef.current.play();
-                  setIsPlaying(true);
-                  audioRef.current.currentTime = time;
-                  setCurrentTime(time);
-                }}
+                onChange={handleProgressBar}
                 className="w-full my-5 h-1 accent-secondary  cursor-pointer"
               />
 
