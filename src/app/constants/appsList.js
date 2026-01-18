@@ -29,7 +29,13 @@ const dockApps = [
     id: "terminal",
     name: "Skills",
     kind: "app",
-    icon: "terminal.svg",
+    icon: "terminal.png",
+  },
+  {
+    id: "spotify",
+    name: "Spotify",
+    kind: "app",
+    icon: "spotify.svg",
   },
   // {
   //   id: "trash",
@@ -57,7 +63,7 @@ const screenApps = [
     id: "terminal",
     name: "Skills",
     kind: "app",
-    icon: "/icons/apps/terminal.svg",
+    icon: "/icons/apps/terminal.png",
   },
   {
     id: "contact",

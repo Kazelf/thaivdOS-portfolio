@@ -15,7 +15,8 @@ body {
   height: 100dvh;
   overflow: hidden;
 
-  background-image: linear-gradient(var(--blur-bg), var(--blur-bg)),
+  background-image:
+    linear-gradient(var(--blur-bg), var(--blur-bg)),
     url("/images/wallpaper.png");
 
   background-blend-mode: darken;
@@ -104,7 +105,7 @@ body {
   --neutral-300: #6b7280;
   --neutral-foreground: #020617;
 
-  --blur-bg: rgba(0, 0, 0, 0.65);
+  --blur-bg: rgba(0, 0, 0, 0.55);
 }
 
 /* ===== Utilities ===== */
@@ -133,26 +134,20 @@ body {
   @apply p-4 flex-1 min-h-0 overflow-y-auto;
 }
 
-.side-bar {
-  div {
-    h3 {
-      @apply text-xs font-medium mb-2;
-    }
+.side-bar h3 {
+  @apply text-xs font-medium mb-2;
+}
 
-    ul {
-      li {
-        @apply flex items-center gap-2 p-2 rounded-lg mx-3 mb-1 cursor-pointer;
-      }
-    }
+.side-bar ul li {
+  @apply flex items-center gap-2 p-2 rounded-lg mx-3 mb-1 cursor-pointer;
+}
 
-    .active {
-      @apply bg-blue-200 text-blue-600;
-    }
+.side-bar ul li.active {
+  @apply bg-primary/30 text-primary-foreground;
+}
 
-    .not-active {
-      @apply hover:bg-base-300;
-    }
-  }
+.side-bar ul li.not-active {
+  @apply hover:bg-base-300;
 }
 
 .app-icon {
@@ -171,4 +166,31 @@ body {
 .vertical-timeline-element-content p {
   font-weight: normal !important;
   margin-top: 0 !important;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: rotate 30s linear infinite;
+  animation-play-state: running;
+}
+
+.spin-paused {
+  animation-play-state: paused;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

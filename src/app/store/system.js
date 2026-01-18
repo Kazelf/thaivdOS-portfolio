@@ -23,7 +23,7 @@ const useSystemStore = create(
       set((state) => {
         state.wifi = !state.wifi;
       }),
-  }))
+  })),
 );
 
 export default useSystemStore;

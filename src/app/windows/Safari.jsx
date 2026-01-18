@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import clsx from "clsx";
 import {
@@ -99,7 +98,7 @@ const Safari = () => {
       <div
         className={clsx(
           "window-content grid gap-3 max-md:grid-cols-1 max-md:gap-10",
-          wifi && "grid-cols-2"
+          wifi && "grid-cols-2",
         )}
       >
         {wifi ? (
