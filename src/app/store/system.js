@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -8,6 +9,7 @@ const useSystemStore = create(
     wifi: true,
     bluetooth: true,
     airdrop: true,
+    audioPlaying: false,
 
     setLogin: (login) =>
       set((state) => {
@@ -34,6 +36,11 @@ const useSystemStore = create(
     toggleAirDrop: () =>
       set((state) => {
         state.airdrop = !state.airdrop;
+      }),
+
+    setAudioPlaying: (audioPlaying) =>
+      set((state) => {
+        state.audioPlaying = audioPlaying;
       }),
   })),
 );

@@ -4,13 +4,13 @@ import Image from "next/image";
 import clsx from "clsx";
 import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
-import { useLocationStore } from "../store";
+import { useLocationStore, useSystemStore } from "../store";
 import { musics } from "../constants";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 const Spotify = () => {
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { audioPlaying, setAudioPlaying } = useSystemStore();
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -21,12 +21,12 @@ const Spotify = () => {
   const handlePlayButton = () => {
     if (!audioRef.current) return;
 
-    if (isPlaying) {
+    if (audioPlaying) {
       audioRef.current.pause();
-      setIsPlaying(false);
+      setAudioPlaying(false);
     } else {
       audioRef.current.play();
-      setIsPlaying(true);
+      setAudioPlaying(true);
     }
   };
 
@@ -34,18 +34,18 @@ const Spotify = () => {
   const handleProgressBar = (e) => {
     const time = Number(e.target.value);
     audioRef.current.play();
-    setIsPlaying(true);
+    setAudioPlaying(true);
     audioRef.current.currentTime = time;
     setCurrentTime(time);
   };
 
   //handle auto play song when open
   useEffect(() => {
-    if (!audioRef.current || (activeSong.id === 1 && !isPlaying)) return;
+    if (!audioRef.current || (activeSong.id === 1 && !audioPlaying)) return;
 
     audioRef.current.load();
     audioRef.current.play();
-    setIsPlaying(true);
+    setAudioPlaying(true);
   }, [activeSong]);
 
   //handle prev/next song
@@ -129,7 +129,7 @@ const Spotify = () => {
                 alt={activeSong.name}
                 className={clsx(
                   "w-full rounded-full shadow-lg mb-3 p-2",
-                  isPlaying ? "spin" : "spin-paused",
+                  audioPlaying ? "spin" : "spin-paused",
                 )}
               />
               <h3 className="font-semibold text-shadow-2xs">
@@ -157,7 +157,7 @@ const Spotify = () => {
                   onClick={handlePlayButton}
                   className="hover:scale-105 transition"
                 >
-                  {isPlaying ? <Pause /> : <Play />}
+                  {audioPlaying ? <Pause /> : <Play />}
                 </button>
 
                 <button aria-label="Next" onClick={handleNext}>
@@ -168,8 +168,8 @@ const Spotify = () => {
               <audio
                 ref={audioRef}
                 src={activeSong.music}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
+                onPlay={() => setAudioPlaying(true)}
+                onPause={() => setAudioPlaying(false)}
                 onLoadedMetadata={() => setDuration(audioRef.current.duration)}
                 onTimeUpdate={() =>
                   setCurrentTime(audioRef.current.currentTime)

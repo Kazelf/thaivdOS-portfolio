@@ -196,7 +196,7 @@ body {
 }
 
 .cc-box {
-  @apply bg-base shadow-2xl rounded-xl flex flex-col justify-center gap-2 p-2;
+  @apply bg-base shadow-2xl rounded-xl flex gap-2 p-2;
 }
 
 .cc-btn {
