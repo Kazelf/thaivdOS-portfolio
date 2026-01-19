@@ -34,7 +34,7 @@ const MenuWrapperClient = ({
         duration: 0.25,
         ease: "power3.out",
         pointerEvents: "auto",
-      }
+      },
     );
   }, [isOpen]);
 
@@ -42,7 +42,7 @@ const MenuWrapperClient = ({
     <div
       ref={menuRef}
       onClick={(e) => e.stopPropagation()}
-      className={`absolute ${menuPosition} rounded-xl bg-base/95 backdrop-blur-2xl shadow-lg p-3`}
+      className={`absolute ${menuPosition} border border-base-foreground/20 rounded-xl bg-base/85 backdrop-blur-2xl shadow-lg p-3`}
     >
       <Component {...props} />
     </div>

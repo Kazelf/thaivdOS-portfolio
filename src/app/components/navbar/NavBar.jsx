@@ -12,6 +12,8 @@ const NavBar = () => {
   const settingsBtnRef = useRef(null);
   const systemBtnRef = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
+
+  //clock helper
   const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "H:mm";
   const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState(dayjs());

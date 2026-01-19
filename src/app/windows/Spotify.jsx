@@ -114,7 +114,7 @@ const Spotify = () => {
               width={24}
               height={24}
             />
-            <p className="ml-4 font-medium truncate">{musicCategory.name}</p>
+            <p className="ml-2 font-medium truncate">{musicCategory.name}</p>
           </div>
           <hr className="my-4 opacity-20" />
           <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>

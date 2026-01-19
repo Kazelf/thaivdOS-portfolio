@@ -3,9 +3,11 @@ import { immer } from "zustand/middleware/immer";
 
 const useSystemStore = create(
   immer((set) => ({
-    login: false,
+    login: true,
     activeMenu: null, //"wifi" | "settings" | "system" | null
     wifi: true,
+    bluetooth: true,
+    airdrop: true,
 
     setLogin: (login) =>
       set((state) => {
@@ -22,6 +24,16 @@ const useSystemStore = create(
     toggleWifi: () =>
       set((state) => {
         state.wifi = !state.wifi;
+      }),
+
+    toggleBluetooth: () =>
+      set((state) => {
+        state.bluetooth = !state.bluetooth;
+      }),
+
+    toggleAirDrop: () =>
+      set((state) => {
+        state.airdrop = !state.airdrop;
       }),
   })),
 );
