@@ -1,15 +1,18 @@
-import { useRef } from "react";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 const useSystemStore = create(
   immer((set) => ({
-    login: true,
     activeMenu: null, //"wifi" | "settings" | "system" | null
+
+    login: true,
     wifi: true,
     bluetooth: true,
     airdrop: true,
     audioPlaying: false,
+
+    volume: 0.6,
+    brightness: 0.8,
 
     setLogin: (login) =>
       set((state) => {
@@ -41,6 +44,21 @@ const useSystemStore = create(
     setAudioPlaying: (audioPlaying) =>
       set((state) => {
         state.audioPlaying = audioPlaying;
+      }),
+
+    toggleAudioPlaying: () =>
+      set((state) => {
+        state.audioPlaying = !state.audioPlaying;
+      }),
+
+    setVolume: (volume) =>
+      set((state) => {
+        state.volume = volume <= 1 && volume >= 0 ? volume : 0;
+      }),
+
+    setBrightness: (brightness) =>
+      set((state) => {
+        state.brightness = brightness <= 1 && brightness >= 0 ? brightness : 0;
       }),
   })),
 );

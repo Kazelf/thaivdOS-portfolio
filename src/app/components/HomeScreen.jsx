@@ -21,8 +21,6 @@ const HomeScreen = () => {
     } else {
       openWindow(app.id);
     }
-
-    console.log(windows);
   };
 
   const openItem = (item) => {

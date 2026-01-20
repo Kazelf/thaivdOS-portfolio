@@ -3,7 +3,7 @@ import { useSystemStore, useWindowStore } from "@/app/store";
 import MenuWrapper from "@/app/hoc/MenuWrapper";
 
 const SystemMenu = () => {
-  const { setLogin, closeMenu } = useSystemStore();
+  const { setLogin, closeMenu, setAudioPlaying } = useSystemStore();
   const { resetAllWindows } = useWindowStore();
 
   return (
@@ -13,6 +13,7 @@ const SystemMenu = () => {
           onClick={(e) => {
             e.stopPropagation();
             closeMenu();
+            setAudioPlaying(false);
             resetAllWindows();
             setLogin(false);
           }}

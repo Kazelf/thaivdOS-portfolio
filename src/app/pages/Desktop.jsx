@@ -10,8 +10,11 @@ import {
   Safari,
   Spotify,
 } from "../windows";
+import { useIsDesktop } from "../hooks";
 
 const Desktop = () => {
+  const { isDesktopSafe } = useIsDesktop();
+
   return (
     <>
       <NavBar />
@@ -24,9 +27,14 @@ const Desktop = () => {
       <Finder />
       <Safari />
       <Contact />
-      <Spotify />
       <Text />
       <ImageWindow />
+
+      {isDesktopSafe && (
+        <>
+          <Spotify />
+        </>
+      )}
     </>
   );
 };
