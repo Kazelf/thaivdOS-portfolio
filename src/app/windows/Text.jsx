@@ -27,7 +27,7 @@ const Text = () => {
       </div>
 
       <div className="window-content">
-        {image ? (
+        {image && (
           <Image
             src={image}
             alt={name}
@@ -35,16 +35,16 @@ const Text = () => {
             height={150}
             className="rounded-lg"
           />
-        ) : null}
-        {subtitle ? <h2 className="font-semibold my-3">{subtitle}</h2> : null}
+        )}
+        {subtitle && <h2 className="font-semibold my-3">{subtitle}</h2>}
 
-        {Array.isArray(description) && description.length > 0 ? (
+        {Array.isArray(description) && description.length > 0 && (
           <div className="space-y-3 leading-relaxed">
             {description.map((para, i) => (
               <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
             ))}
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

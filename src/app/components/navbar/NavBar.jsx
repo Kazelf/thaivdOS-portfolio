@@ -12,6 +12,8 @@ const NavBar = () => {
   const settingsBtnRef = useRef(null);
   const systemBtnRef = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
+
+  //clock helper
   const timeFormat = isDesktopSafe ? "ddd MMM D h:mm A" : "H:mm";
   const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState(dayjs());
@@ -31,7 +33,7 @@ const NavBar = () => {
   const { toggleMenu, activeMenu } = useSystemStore();
 
   return (
-    <nav className="z-10000 bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0">
+    <nav className="z-2000 bg-base/70 backdrop-blur-3xl select-none flex justify-between items-center p-1 px-5 fixed top-0 left-0 right-0">
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         <NavBarItem
           name={"system"}

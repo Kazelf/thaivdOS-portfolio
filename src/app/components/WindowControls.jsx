@@ -19,7 +19,7 @@ const WindowControls = ({ target, canGoBack = false }) => {
         <XIcon className="h-5 w-5" />
       </button>
 
-      {showGoBack ? (
+      {showGoBack && (
         <button
           onPointerUp={() => goBack()}
           className="p-1 cursor-pointer"
@@ -27,7 +27,7 @@ const WindowControls = ({ target, canGoBack = false }) => {
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
-      ) : null}
+      )}
     </div>
   );
 };

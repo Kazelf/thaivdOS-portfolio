@@ -4,48 +4,56 @@ import Image from "next/image";
 import clsx from "clsx";
 import WindowWrapper from "../hoc/WindowWrapper";
 import { WindowControls } from "../components";
-import { useLocationStore } from "../store";
+import { useLocationStore, useSystemStore } from "../store";
 import { musics } from "../constants";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 const Spotify = () => {
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+
+  const { audioPlaying, setAudioPlaying, toggleAudioPlaying, volume } =
+    useSystemStore();
 
   const { musicCategory, setMusicCategory, activeSong, setActiveSong } =
     useLocationStore();
 
-  //hanle play button
-  const handlePlayButton = () => {
+  //handle audio play when audioPlaying is true
+  useEffect(() => {
     if (!audioRef.current) return;
 
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
+    if (audioPlaying) {
       audioRef.current.play();
-      setIsPlaying(true);
+    } else {
+      audioRef.current.pause();
     }
-  };
+  }, [audioPlaying]);
+
+  //handle set audio volume
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    audioRef.current.volume = volume;
+  }, [volume]);
 
   //handle audio progress bar
   const handleProgressBar = (e) => {
     const time = Number(e.target.value);
     audioRef.current.play();
-    setIsPlaying(true);
+    setAudioPlaying(true);
     audioRef.current.currentTime = time;
     setCurrentTime(time);
   };
 
-  //handle auto play song when open
+  //handle auto play song when open new song
   useEffect(() => {
-    if (!audioRef.current || (activeSong.id === 1 && !isPlaying)) return;
+    if (!audioRef.current || (activeSong.id === 1 && !audioPlaying)) return;
 
     audioRef.current.load();
     audioRef.current.play();
-    setIsPlaying(true);
+    setAudioPlaying(true);
   }, [activeSong]);
 
   //handle prev/next song
@@ -81,11 +89,7 @@ const Spotify = () => {
             />
             <div>
               <p className="text-sm font-medium truncate">{item.name}</p>
-              {item.author ? (
-                <p className="text-xs truncate">{item.author}</p>
-              ) : (
-                <></>
-              )}
+              {item.author && <p className="text-xs truncate">{item.author}</p>}
             </div>
           </li>
         ))}
@@ -114,7 +118,7 @@ const Spotify = () => {
               width={24}
               height={24}
             />
-            <p className="ml-4 font-medium truncate">{musicCategory.name}</p>
+            <p className="ml-2 font-medium truncate">{musicCategory.name}</p>
           </div>
           <hr className="my-4 opacity-20" />
           <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>
@@ -122,64 +126,52 @@ const Spotify = () => {
         </div>
 
         <div className="col-span-4 flex-center flex-col bg-secondary/50 text-secondary-foreground m-4 p-6 rounded-2xl">
-          {activeSong.id !== 0 ? (
-            <>
-              <img
-                src={activeSong.image}
-                alt={activeSong.name}
-                className={clsx(
-                  "w-full rounded-full shadow-lg mb-3 p-2",
-                  isPlaying ? "spin" : "spin-paused",
-                )}
-              />
-              <h3 className="font-semibold text-shadow-2xs">
-                {activeSong.name}
-              </h3>
-              <p className="text-sm text-shadow-2xs">{activeSong.author}</p>
+          <img
+            src={activeSong.image}
+            alt={activeSong.name}
+            className={clsx(
+              "w-full rounded-full shadow-lg mb-3 p-2",
+              audioPlaying ? "spin" : "spin-paused",
+            )}
+          />
+          <h3 className="font-semibold text-shadow-2xs">{activeSong.name}</h3>
+          <p className="text-sm text-shadow-2xs">{activeSong.author}</p>
 
-              <input
-                type="range"
-                min={0}
-                max={duration}
-                value={currentTime}
-                step={0.1}
-                onChange={handleProgressBar}
-                className="w-full my-5 h-1 accent-secondary  cursor-pointer"
-              />
+          <input
+            type="range"
+            min={0}
+            max={duration}
+            value={currentTime}
+            step={0.1}
+            onChange={handleProgressBar}
+            className="w-full my-5 h-1 accent-secondary cursor-pointer"
+          />
 
-              <div className="flex justify-around w-full">
-                <button aria-label="Prev" onClick={handlePrev}>
-                  <SkipBack />
-                </button>
+          <div className="flex justify-around w-full">
+            <button aria-label="Prev" onClick={handlePrev}>
+              <SkipBack />
+            </button>
 
-                <button
-                  aria-label="Play"
-                  onClick={handlePlayButton}
-                  className="hover:scale-105 transition"
-                >
-                  {isPlaying ? <Pause /> : <Play />}
-                </button>
+            <button
+              aria-label="Play"
+              onClick={toggleAudioPlaying}
+              className="hover:scale-105 transition"
+            >
+              {audioPlaying ? <Pause /> : <Play />}
+            </button>
 
-                <button aria-label="Next" onClick={handleNext}>
-                  <SkipForward />
-                </button>
-              </div>
+            <button aria-label="Next" onClick={handleNext}>
+              <SkipForward />
+            </button>
+          </div>
 
-              <audio
-                ref={audioRef}
-                src={activeSong.music}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onLoadedMetadata={() => setDuration(audioRef.current.duration)}
-                onTimeUpdate={() =>
-                  setCurrentTime(audioRef.current.currentTime)
-                }
-                loop
-              />
-            </>
-          ) : (
-            <></>
-          )}
+          <audio
+            ref={audioRef}
+            src={activeSong.music}
+            onLoadedMetadata={() => setDuration(audioRef.current.duration)}
+            onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
+            loop
+          />
         </div>
       </div>
     </div>

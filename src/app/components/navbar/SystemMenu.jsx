@@ -1,9 +1,10 @@
 import React from "react";
-import { useSystemStore, useWindowStore } from "@/app/store";
+import { useLocationStore, useSystemStore, useWindowStore } from "@/app/store";
 import MenuWrapper from "@/app/hoc/MenuWrapper";
 
 const SystemMenu = () => {
-  const { setLogin, closeMenu } = useSystemStore();
+  const { setLogin, closeMenu, setAudioPlaying } = useSystemStore();
+  const { resetActiveSong } = useLocationStore();
   const { resetAllWindows } = useWindowStore();
 
   return (
@@ -13,7 +14,14 @@ const SystemMenu = () => {
           onClick={(e) => {
             e.stopPropagation();
             closeMenu();
+
+            //close audio
+            setAudioPlaying(false);
+            resetActiveSong();
+
+            //close all windows
             resetAllWindows();
+
             setLogin(false);
           }}
           aria-label={"lock"}

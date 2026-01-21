@@ -48,7 +48,7 @@ const Safari = () => {
             <p className="text-base-foreground/50">{date}</p>
             <h3 className="text-lg font-semibold">{title}</h3>
             <h4 className="text-sm text-primary-300">{role}</h4>
-            {Array.isArray(description) && description.length > 0 ? (
+            {Array.isArray(description) && description.length > 0 && (
               <ul className="ml-2 list-disc leading-relaxed pt-2">
                 {description.map((para, i) => (
                   <li key={i}>
@@ -56,7 +56,7 @@ const Safari = () => {
                   </li>
                 ))}
               </ul>
-            ) : null}
+            )}
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>
