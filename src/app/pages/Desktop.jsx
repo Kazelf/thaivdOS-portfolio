@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBar, HeroSection, Dock, HomeScreen } from "../components";
+import { NavBar, HeroSection, Dock, ScreenApps } from "../components";
 import {
   Terminal,
   Resume,
@@ -11,19 +11,28 @@ import {
   Spotify,
 } from "../windows";
 import { useIsDesktop } from "../hooks";
+import { useSystemStore } from "../store";
 
 const Desktop = () => {
   const { isDesktopSafe } = useIsDesktop();
+  const { brightness } = useSystemStore();
 
   return (
     <>
+      <div
+        className={`fixed z-10000 inset-0 overflow-hidden bg-black`}
+        style={{
+          pointerEvents: "none",
+          opacity: `${(1 - brightness) / 4}`,
+        }}
+      ></div>
+
       <NavBar />
       <HeroSection />
       <Dock />
-      <HomeScreen />
+      <ScreenApps />
 
       <Terminal />
-      <Resume />
       <Finder />
       <Safari />
       <Contact />

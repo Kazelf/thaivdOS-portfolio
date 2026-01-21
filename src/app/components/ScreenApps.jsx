@@ -7,7 +7,7 @@ import useWindowStore from "../store/window";
 
 const projects = locations.work?.children ?? [];
 
-const HomeScreen = () => {
+const ScreenApps = () => {
   const { setActiveLocation } = useLocationStore();
   const { openWindow, closeWindow, windows } = useWindowStore();
 
@@ -60,4 +60,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ScreenApps;

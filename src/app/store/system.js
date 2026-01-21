@@ -5,14 +5,14 @@ const useSystemStore = create(
   immer((set) => ({
     activeMenu: null, //"wifi" | "settings" | "system" | null
 
-    login: true,
+    login: false,
     wifi: true,
     bluetooth: true,
     airdrop: true,
     audioPlaying: false,
 
     volume: 0.6,
-    brightness: 0.8,
+    brightness: 1,
 
     setLogin: (login) =>
       set((state) => {

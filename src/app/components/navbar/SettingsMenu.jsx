@@ -110,8 +110,10 @@ const SettingsMenu = () => {
             className="rounded-md mb-2"
           />
 
-          <div className="font-medium text-sm">{activeSong.name}</div>
-          <div className="text-xs text-base-foreground/70">
+          <div className="font-medium text-sm truncate w-full">
+            {activeSong.name}
+          </div>
+          <div className="text-xs text-base-foreground/70 truncate w-full">
             {activeSong.author}
           </div>
         </div>
@@ -137,21 +139,13 @@ const SettingsMenu = () => {
             max={100}
             value={brightness * 100}
             onChange={(e) => setBrightness(e.target.value / 100)}
-            data-tooltip-id="brightness-tooltip"
+            data-tooltip-id="slider-tooltip"
             data-tooltip-content={`${Math.round(brightness * 100)}`}
             data-tooltip-delay-show={100}
             className="w-full accent-primary cursor-pointer"
           />
           <Sun />
         </div>
-
-        <Tooltip
-          id="brightness-tooltip"
-          place="top"
-          offset={1}
-          noArrow="true"
-          className="bg-base-300/50! backdrop-blur-lg! p-2! py-1! text-base-foreground! shadow-2xl!"
-        />
       </div>
 
       <div className="col-span-4 cc-box flex-col justify-center">
@@ -164,22 +158,22 @@ const SettingsMenu = () => {
             max={100}
             value={volume * 100}
             onChange={(e) => setVolume(e.target.value / 100)}
-            data-tooltip-id="volume-tooltip"
+            data-tooltip-id="slider-tooltip"
             data-tooltip-content={`${Math.round(volume * 100)}`}
             data-tooltip-delay-show={100}
             className="w-full accent-primary cursor-pointer"
           />
           <Volume2 />
         </div>
-
-        <Tooltip
-          id="volume-tooltip"
-          place="top"
-          offset={1}
-          noArrow="true"
-          className="bg-base-300/50! backdrop-blur-lg! p-2! py-1! text-base-foreground! shadow-2xl!"
-        />
       </div>
+
+      <Tooltip
+        id="slider-tooltip"
+        place="top"
+        offset={1}
+        noArrow="true"
+        className="bg-base-300/50! backdrop-blur-lg! p-2! py-1! text-base-foreground! shadow-2xl!"
+      />
     </div>
   );
 };

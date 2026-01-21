@@ -37,7 +37,7 @@
   }
 
   .switch-toggle input:checked + .slider-toggle {
-    @apply bg-blue-500;
+    @apply bg-primary;
   }
 
   .switch-toggle input:checked + .slider-toggle:before {
