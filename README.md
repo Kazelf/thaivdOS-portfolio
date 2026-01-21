@@ -33,9 +33,11 @@ src/
 │   ├── constants/      # App & system constants
 │   ├── hoc/            # High Order Components
 │   ├── hooks/          # Custom hooks
+│   ├── pages/          # Pages: Login, Desktop
 │   ├── store/          # Zustand stores
 │   ├── styles/         # Styles with CSS and Tailwind
 │   ├── windows/        # App windows content
+│   ├── page.js         # Display pages
 │   └── layout.js
 ├── lib/
 │   └── gsapClient.js   # GSAP setup
@@ -56,6 +58,9 @@ npm run dev
 ```
 ## Change Logs
 
+- **2026.01.21**: Change control center.
+- **2026.01.18**: Add Spotify app.
+- **2026.01.09**: Add loading screen.
 - **2026.01.04**: Add dark theme.
 - **2026.01.02**: Add features: wifi, settings.
 - **2026.01.01**: Add mobile version.
