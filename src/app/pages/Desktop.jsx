@@ -9,6 +9,7 @@ import {
   ImageWindow,
   Safari,
   Spotify,
+  VSCode,
 } from "../windows";
 import { useIsDesktop } from "../hooks";
 import { useSystemStore } from "../store";
@@ -42,6 +43,7 @@ const Desktop = () => {
       {isDesktopSafe && (
         <>
           <Spotify />
+          <VSCode />
         </>
       )}
     </>

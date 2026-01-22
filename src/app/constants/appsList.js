@@ -37,6 +37,12 @@ const dockApps = [
     kind: "app",
     icon: "spotify.svg",
   },
+  {
+    id: "vscode",
+    name: "VS Code",
+    kind: "app",
+    icon: "vscode.png",
+  },
   // {
   //   id: "trash",
   //   name: "Archives",
