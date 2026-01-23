@@ -55,7 +55,7 @@ const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
       id={windowKey}
       ref={ref}
       style={{ zIndex }}
-      className="absolute top-0 lg:top-1/12 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden"
+      className="fixed top-0 lg:top-1/12 left-1/2 -translate-x-1/2 hidden"
     >
       <Component {...props} />
     </section>
