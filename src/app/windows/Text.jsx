@@ -20,7 +20,7 @@ const Text = () => {
   const { name, image, subtitle, description } = data;
 
   return (
-    <div className="window w-lg">
+    <div className="window w-lg xl:max-h-[70vh]!">
       <div className="window-header">
         <WindowControls target="txtfile" />
         <h2 className="flex-1">{name}</h2>

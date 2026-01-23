@@ -104,7 +104,7 @@ const Spotify = () => {
         <h2 className="w-full">Spotify</h2>
       </div>
 
-      <div className="p-0 space-y-5 grid grid-cols-12 h-full min-h-0">
+      <div className="p-0 grid grid-cols-12 h-full min-h-0">
         <div className="side-bar h-full max-lg:hidden col-span-3 p-3 bg-base border-r border-r-base-300">
           <h3>Categories</h3>
           {renderList(Object.values(musics), musicCategory, setMusicCategory)}

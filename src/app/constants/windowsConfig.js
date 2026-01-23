@@ -6,6 +6,7 @@ const WINDOW_CONFIG = {
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  vscode: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },

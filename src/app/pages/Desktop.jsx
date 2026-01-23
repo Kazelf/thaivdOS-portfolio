@@ -9,13 +9,17 @@ import {
   ImageWindow,
   Safari,
   Spotify,
+  VSCode,
 } from "../windows";
 import { useIsDesktop } from "../hooks";
-import { useSystemStore } from "../store";
+import { useSystemStore, useWindowStore } from "../store";
 
 const Desktop = () => {
   const { isDesktopSafe } = useIsDesktop();
   const { brightness } = useSystemStore();
+  const isVSCodeOpen = useWindowStore(
+    (state) => state.windows["vscode"].isOpen,
+  );
 
   return (
     <>
@@ -42,6 +46,7 @@ const Desktop = () => {
       {isDesktopSafe && (
         <>
           <Spotify />
+          {isVSCodeOpen && <VSCode />}
         </>
       )}
     </>

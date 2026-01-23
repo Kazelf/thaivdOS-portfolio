@@ -3,9 +3,10 @@ import Resume from "./Resume";
 import Finder from "./Finder";
 import Safari from "./Safari";
 import Contact from "./Contact";
-import Spotify from "./Spotify";
 import Text from "./Text";
 import ImageWindow from "./ImageFile";
+import Spotify from "./Spotify";
+import VSCode from "./VSCode";
 
 export {
   Terminal,
@@ -16,4 +17,5 @@ export {
   Spotify,
   Text,
   ImageWindow,
+  VSCode,
 };
