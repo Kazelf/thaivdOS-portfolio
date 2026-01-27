@@ -136,6 +136,51 @@ const WORK_LOCATION = {
         },
       ],
     },
+    {
+      id: 8,
+      name: "When Dreams Are Forgotten",
+      icon: "/icons/finder/folder.svg",
+      kind: "folder",
+      children: [
+        {
+          id: 1,
+          name: "WDAF.txt",
+          icon: "/icons/finder/txt.svg",
+          kind: "file",
+          fileType: "txt",
+          description: [
+            'Landing page for social project: "Khi ước mơ bị bỏ quên"(When Dreams Are Forgotten) helping young people find motivation to follow their dreams',
+            "• Designed and built the page using Next.js, TailwindCSS.",
+            "• Allowed young people share their stories about dreams.",
+          ],
+        },
+        {
+          id: 2,
+          name: "LandingPage.png",
+          icon: "/icons/finder/png.svg",
+          kind: "file",
+          fileType: "img",
+          image: "/images/projects/wdaforgotten.png",
+        },
+        {
+          id: 3,
+          name: "khiuocmobi boquen.com",
+          icon: "/icons/apps/safari.svg",
+          kind: "file",
+          fileType: "url",
+          url: "https://khiuocmobiboquen.vercel.app",
+        },
+
+        {
+          id: 4,
+          name: "Source.github",
+          icon: "/icons/finder/html.svg",
+          kind: "file",
+          fileType: "url",
+          url: "https://github.com/Kazelf/whendreamsareforgotten-landingpage",
+        },
+      ],
+    },
   ],
 };
 

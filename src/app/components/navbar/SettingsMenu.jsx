@@ -101,7 +101,7 @@ const SettingsMenu = () => {
       </div>
 
       <div className="col-span-2 row-span-2 cc-box flex-col">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-center">
           <Image
             src={activeSong.image}
             alt={activeSong.name}
