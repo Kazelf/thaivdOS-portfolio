@@ -43,6 +43,12 @@ const dockApps = [
     kind: "app",
     icon: "vscode.png",
   },
+  {
+    id: "wordle",
+    name: "Wordle",
+    kind: "app",
+    icon: "wordle.png",
+  },
   // {
   //   id: "trash",
   //   name: "Archives",

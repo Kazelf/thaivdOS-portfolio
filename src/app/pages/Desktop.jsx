@@ -10,6 +10,7 @@ import {
   Safari,
   Spotify,
   VSCode,
+  Wordle,
 } from "../windows";
 import { useIsDesktop } from "../hooks";
 import { useSystemStore, useWindowStore } from "../store";
@@ -47,6 +48,7 @@ const Desktop = () => {
         <>
           <Spotify />
           {isVSCodeOpen && <VSCode />}
+          <Wordle />
         </>
       )}
     </>

@@ -8,6 +8,8 @@ import Dock from "./Dock";
 import WindowControls from "./WindowControls";
 import ScreenApps from "./ScreenApps";
 import Breadcrumb from "./Breadcrumb";
+import Row from "./wordle/Row";
+import Keyboard from "./wordle/Keyboard";
 
 export {
   NavBar,
@@ -20,4 +22,6 @@ export {
   WindowControls,
   ScreenApps,
   Breadcrumb,
+  Row,
+  Keyboard,
 };
