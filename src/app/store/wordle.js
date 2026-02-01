@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { WORDS } from "../constants";
+import { WORDS, SECRET_WORDS } from "../constants";
 
 const pickRandomWord = () =>
-  WORDS[Math.floor(Math.random() * WORDS.length)].toUpperCase();
+  SECRET_WORDS[Math.floor(Math.random() * SECRET_WORDS.length)].toUpperCase();
 
 const useWordleStore = create(
   immer((set, get) => ({

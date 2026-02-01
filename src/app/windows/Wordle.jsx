@@ -13,6 +13,20 @@ const Wordle = () => {
   const removeLetter = useWordleStore((s) => s.removeLetter);
   const submitGuess = useWordleStore((s) => s.submitGuess);
 
+  //prevent click button when press enter
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
+  //render letter when press key
   useEffect(() => {
     const handleKey = (e) => {
       if (status !== "playing") return;
@@ -38,17 +52,15 @@ const Wordle = () => {
           <Row key={i} guess={g} isActive={i < currentRow} />
         ))}
 
-        {message !== " " && message}
+        {message !== "" && message}
 
         {status !== "playing" && (
-          <div className="text-center">
-            <button
-              onClick={reset}
-              className="px-4 py-1 bg-primary text-primary-foreground hover:bg-primary-200 rounded"
-            >
-              New game
-            </button>
-          </div>
+          <button
+            onClick={reset}
+            className="px-4 py-1 mt-2 bg-primary text-primary-foreground hover:bg-primary-200 rounded"
+          >
+            New game
+          </button>
         )}
 
         <Keyboard />
