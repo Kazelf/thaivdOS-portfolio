@@ -20,10 +20,10 @@ const Keyboard = () => {
 
   const getColor = (key) => {
     const status = keyStatuses[key];
-    if (status === "correct") return "bg-green-500 text-white";
-    if (status === "present") return "bg-yellow-500 text-white";
-    if (status === "absent") return "bg-gray-500 text-white";
-    return "bg-gray-400 text-white";
+    if (status === "correct") return "bg-green-500";
+    if (status === "present") return "bg-yellow-500";
+    if (status === "absent") return "bg-gray-500";
+    return "bg-gray-400 hover:bg-gray-300";
   };
 
   return (
@@ -34,7 +34,7 @@ const Keyboard = () => {
             <div
               key={key}
               onClick={() => handleClick(key)}
-              className={`px-3 py-2 rounded font-semibold ${getColor(key)}`}
+              className={`px-3 py-2 cursor-pointer select-none text-white rounded font-semibold ${getColor(key)}`}
             >
               {key}
             </div>
