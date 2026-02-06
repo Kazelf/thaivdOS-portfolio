@@ -21,3 +21,6 @@ export { WINDOW_CONFIG, INITIAL_Z_INDEX };
 
 import { musics } from "./musicsList";
 export { musics };
+
+import { WORDS, SECRET_WORDS } from "./wordleWords";
+export { WORDS, SECRET_WORDS };

@@ -7,6 +7,7 @@ import Text from "./Text";
 import ImageWindow from "./ImageFile";
 import Spotify from "./Spotify";
 import VSCode from "./VSCode";
+import Wordle from "./Wordle";
 
 export {
   Terminal,
@@ -18,4 +19,5 @@ export {
   Text,
   ImageWindow,
   VSCode,
+  Wordle,
 };
