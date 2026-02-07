@@ -37,7 +37,6 @@ export const SECRET_WORDS = [
   "quiet",
   "smart",
   "funny",
-  "kindy",
   "green",
   "black",
   "white",
