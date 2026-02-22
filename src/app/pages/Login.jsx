@@ -50,12 +50,16 @@ const Login = ({ setLogin }) => {
       <div className="login-blur absolute inset-0 backdrop-blur-xl bg-blur-bg/15" />
 
       <div
-        className="login-content text-white font-georama absolute top-1/2 left-1/2 
+        className="login-content flex flex-col items-center text-white font-georama absolute top-1/2 left-1/2 
         -translate-x-1/2 -translate-y-1/2"
       >
+        <p className="mb-10 text-2xl italic text-center font-semibold hover:animate-spin">
+          WELCOME TO THAIVD OS
+        </p>
+
         <div
           ref={clockRef}
-          className="mb-3 flex flex-col gap-5 items-center p-4 px-10 
+          className="mb-3 flex flex-col gap-5 items-center p-4 px-8 
           bg-base/40 backdrop-blur-xl rounded-xl"
         >
           <time className="text-xl font-medium">{now.format("MMM D")}</time>
