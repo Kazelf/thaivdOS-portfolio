@@ -34,6 +34,15 @@ const achievements = [
     ],
   },
   {
+    id: 5,
+    date: "Nov 2025, Mar 2026",
+    title: "Top 5 SE Student of Semester, FPT University",
+    role: "Excellent Student",
+    description: [
+      "Top 5 Highest Total Score in semester Summer 2025, Fall 2025",
+    ],
+  },
+  {
     id: 2,
     date: "Feb 2025",
     title: "Algorithm Arena 6.0: Enjourney",
