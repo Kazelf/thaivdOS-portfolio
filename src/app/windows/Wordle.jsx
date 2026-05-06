@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { Info } from "lucide-react";
 import WindowWrapper from "../hoc/WindowWrapper";
-import { WindowControls, Row, Keyboard, Instruction } from "../components";
+import { Row, Keyboard, Instruction } from "../components";
 import { useWordleStore } from "../store";
+import WordleHeaderSlot from "../components/headerslot/WordleHeaderSlot";
 
 const Wordle = () => {
   const guesses = useWordleStore((s) => s.guesses);
@@ -15,13 +15,9 @@ const Wordle = () => {
   const addLetter = useWordleStore((s) => s.addLetter);
   const removeLetter = useWordleStore((s) => s.removeLetter);
   const submitGuess = useWordleStore((s) => s.submitGuess);
+  const showInfo = useWordleStore((s) => s.showInfo);
+  const toggleInfo = useWordleStore((s) => s.toggleInfo);
 
-  const [info, setInfo] = useState(true);
-  const toggleInfo = () => {
-    setInfo(!info);
-  };
-
-  //prevent click button when press enter
   useEffect(() => {
     const handler = (e) => {
       if (e.key === "Enter") {
@@ -29,71 +25,53 @@ const Wordle = () => {
         e.stopPropagation();
       }
     };
-
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  //render letter when press key
   useEffect(() => {
     const handleKey = (e) => {
       if (status !== "playing") return;
-
       if (e.key === "Enter") submitGuess();
       else if (e.key === "Backspace") removeLetter();
       else if (/^[a-zA-Z]$/.test(e.key)) addLetter(e.key.toUpperCase());
     };
-
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [status, addLetter, removeLetter, submitGuess]);
 
   return (
-    <div className="window w-xl">
-      <div className="window-header">
-        <WindowControls target="wordle" />
-        <h2 className="w-full">Wordle Game</h2>
+    <div className="window-content flex-center flex-col relative">
+      {showInfo && <Instruction open={showInfo} onClose={toggleInfo} />}
+
+      {guesses.map((g, i) => (
+        <Row
+          key={i}
+          guess={g}
+          isActive={i < currentRow}
+          solution={solution}
+        />
+      ))}
+
+      {message !== "" && message}
+
+      {status !== "playing" && (
         <button
-          onPointerUp={() => toggleInfo()}
-          className={clsx(
-            "p-1 cursor-pointer rounded-md hover:bg-base-200",
-            info && "bg-base-300",
-          )}
-          aria-label="Close"
+          onClick={reset}
+          className="px-4 py-1 mt-2 bg-primary text-primary-foreground hover:bg-primary-200 rounded"
         >
-          <Info className="h-5 w-5" />
+          New game
         </button>
-      </div>
+      )}
 
-      <div className="window-content flex-center flex-col relative">
-        {info && <Instruction open={info} onClose={() => setInfo(false)} />}
-
-        {guesses.map((g, i) => (
-          <Row
-            key={i}
-            guess={g}
-            isActive={i < currentRow}
-            solution={solution}
-          />
-        ))}
-
-        {message !== "" && message}
-
-        {status !== "playing" && (
-          <button
-            onClick={reset}
-            className="px-4 py-1 mt-2 bg-primary text-primary-foreground hover:bg-primary-200 rounded"
-          >
-            New game
-          </button>
-        )}
-
-        <Keyboard />
-      </div>
+      <Keyboard />
     </div>
   );
 };
 
-const WordleWindow = WindowWrapper(Wordle, "wordle");
+const WordleWindow = WindowWrapper(Wordle, "wordle", {
+  windowClassName: "window w-xl",
+  HeaderSlot: WordleHeaderSlot,
+});
 
 export default WordleWindow;

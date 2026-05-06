@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import WindowWrapper from "../hoc/WindowWrapper";
-import { WindowControls } from "../components";
 import { useLocationStore, useSystemStore } from "../store";
 import { musics } from "../constants";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
@@ -20,10 +19,8 @@ const Spotify = () => {
   const { musicCategory, setMusicCategory, activeSong, setActiveSong } =
     useLocationStore();
 
-  //handle audio play when audioPlaying is true
   useEffect(() => {
     if (!audioRef.current) return;
-
     if (audioPlaying) {
       audioRef.current.play();
     } else {
@@ -31,14 +28,11 @@ const Spotify = () => {
     }
   }, [audioPlaying]);
 
-  //handle set audio volume
   useEffect(() => {
     if (!audioRef.current) return;
-
     audioRef.current.volume = volume;
   }, [volume]);
 
-  //handle audio progress bar
   const handleProgressBar = (e) => {
     const time = Number(e.target.value);
     audioRef.current.play();
@@ -47,16 +41,13 @@ const Spotify = () => {
     setCurrentTime(time);
   };
 
-  //handle auto play song when open new song
   useEffect(() => {
     if (!audioRef.current || (activeSong.id === 1 && !audioPlaying)) return;
-
     audioRef.current.load();
     audioRef.current.play();
     setAudioPlaying(true);
   }, [activeSong]);
 
-  //handle prev/next song
   const allSongs = musics.all.children;
   const currentIndex = allSongs.findIndex((song) => song.id === activeSong.id);
 
@@ -98,86 +89,82 @@ const Spotify = () => {
   );
 
   return (
-    <div className="window w-3xl h-[70vh]">
-      <div className="window-header">
-        <WindowControls target="spotify" />
-        <h2 className="w-full">Spotify</h2>
+    <div className="p-0 grid grid-cols-12 h-full min-h-0">
+      <div className="side-bar h-full max-lg:hidden col-span-3 p-3 bg-base border-r border-r-base-300">
+        <h3>Categories</h3>
+        {renderList(Object.values(musics), musicCategory, setMusicCategory)}
       </div>
 
-      <div className="p-0 grid grid-cols-12 h-full min-h-0">
-        <div className="side-bar h-full max-lg:hidden col-span-3 p-3 bg-base border-r border-r-base-300">
-          <h3>Categories</h3>
-          {renderList(Object.values(musics), musicCategory, setMusicCategory)}
+      <div className="side-bar flex-1 min-h-0 overflow-y-auto col-span-5 p-3 no-scrollbar">
+        <div className="flex">
+          <Image
+            src={musicCategory.image}
+            alt={musicCategory.name}
+            width={24}
+            height={24}
+          />
+          <p className="ml-2 font-medium truncate">{musicCategory.name}</p>
+        </div>
+        <hr className="my-4 opacity-20" />
+        <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>
+        {renderList(musicCategory?.children, activeSong, setActiveSong)}
+      </div>
+
+      <div className="col-span-4 flex-center flex-col bg-secondary/50 text-secondary-foreground m-4 p-6 rounded-2xl">
+        <img
+          src={activeSong.image}
+          alt={activeSong.name}
+          className={clsx(
+            "w-full rounded-full shadow-lg mb-3 p-2",
+            audioPlaying ? "spin" : "spin-paused",
+          )}
+        />
+        <h3 className="font-semibold text-shadow-2xs">{activeSong.name}</h3>
+        <p className="text-sm text-shadow-2xs">{activeSong.author}</p>
+
+        <input
+          type="range"
+          min={0}
+          max={duration}
+          value={currentTime}
+          step={0.1}
+          onChange={handleProgressBar}
+          className="w-full my-5 h-1 accent-secondary cursor-pointer"
+        />
+
+        <div className="flex justify-around w-full">
+          <button aria-label="Prev" onClick={handlePrev}>
+            <SkipBack />
+          </button>
+
+          <button
+            aria-label="Play"
+            onClick={toggleAudioPlaying}
+            className="hover:scale-105 transition"
+          >
+            {audioPlaying ? <Pause /> : <Play />}
+          </button>
+
+          <button aria-label="Next" onClick={handleNext}>
+            <SkipForward />
+          </button>
         </div>
 
-        <div className="side-bar flex-1 min-h-0 overflow-y-auto col-span-5 p-3 no-scrollbar">
-          <div className="flex">
-            <Image
-              src={musicCategory.image}
-              alt={musicCategory.name}
-              width={24}
-              height={24}
-            />
-            <p className="ml-2 font-medium truncate">{musicCategory.name}</p>
-          </div>
-          <hr className="my-4 opacity-20" />
-          <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>
-          {renderList(musicCategory?.children, activeSong, setActiveSong)}
-        </div>
-
-        <div className="col-span-4 flex-center flex-col bg-secondary/50 text-secondary-foreground m-4 p-6 rounded-2xl">
-          <img
-            src={activeSong.image}
-            alt={activeSong.name}
-            className={clsx(
-              "w-full rounded-full shadow-lg mb-3 p-2",
-              audioPlaying ? "spin" : "spin-paused",
-            )}
-          />
-          <h3 className="font-semibold text-shadow-2xs">{activeSong.name}</h3>
-          <p className="text-sm text-shadow-2xs">{activeSong.author}</p>
-
-          <input
-            type="range"
-            min={0}
-            max={duration}
-            value={currentTime}
-            step={0.1}
-            onChange={handleProgressBar}
-            className="w-full my-5 h-1 accent-secondary cursor-pointer"
-          />
-
-          <div className="flex justify-around w-full">
-            <button aria-label="Prev" onClick={handlePrev}>
-              <SkipBack />
-            </button>
-
-            <button
-              aria-label="Play"
-              onClick={toggleAudioPlaying}
-              className="hover:scale-105 transition"
-            >
-              {audioPlaying ? <Pause /> : <Play />}
-            </button>
-
-            <button aria-label="Next" onClick={handleNext}>
-              <SkipForward />
-            </button>
-          </div>
-
-          <audio
-            ref={audioRef}
-            src={activeSong.music}
-            onLoadedMetadata={() => setDuration(audioRef.current.duration)}
-            onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
-            loop
-          />
-        </div>
+        <audio
+          ref={audioRef}
+          src={activeSong.music}
+          onLoadedMetadata={() => setDuration(audioRef.current.duration)}
+          onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
+          loop
+        />
       </div>
     </div>
   );
 };
 
-const SpotifyWindow = WindowWrapper(Spotify, "spotify");
+const SpotifyWindow = WindowWrapper(Spotify, "spotify", {
+  title: "Spotify",
+  windowClassName: "window w-3xl h-[70vh]",
+});
 
 export default SpotifyWindow;

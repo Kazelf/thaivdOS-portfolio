@@ -3,12 +3,25 @@ import React, { useLayoutEffect, useRef } from "react";
 import useWindowStore from "../store/window";
 import { gsap, useGSAP, Draggable } from "@/lib/gsapClient";
 import { useIsDesktop } from "../hooks";
+import WindowControls from "../components/WindowControls";
 
-const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
+const WindowWrapperClient = ({
+  Component,
+  windowKey,
+  // options từ WindowWrapper
+  title,
+  windowClassName,
+  HeaderSlot,
+  ...props
+}) => {
   const { focusWindow, windows } = useWindowStore();
   const { isOpen, zIndex, data } = windows[windowKey];
   const ref = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
+
+  // title có thể là string hoặc function (data) => string
+  const resolvedTitle =
+    typeof title === "function" ? title(data) : title;
 
   useGSAP(() => {
     const el = ref.current;
@@ -57,7 +70,17 @@ const WindowWrapperClient = ({ Component, windowKey, ...props }) => {
       style={{ zIndex }}
       className="fixed top-0 lg:top-1/12 left-1/2 -translate-x-1/2 hidden"
     >
-      <Component {...props} />
+      <div className={windowClassName}>
+        <div className="window-header">
+          <WindowControls target={windowKey} />
+          {resolvedTitle && (
+            <h2 className="w-full">{resolvedTitle}</h2>
+          )}
+          {HeaderSlot && <HeaderSlot />}
+        </div>
+
+        <Component {...props} />
+      </div>
     </section>
   );
 };

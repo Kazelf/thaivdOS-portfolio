@@ -1,12 +1,18 @@
 import React from "react";
 import WindowWrapperClient from "./WindowWrapper.client";
 
-const WindowWrapper = (Component, windowKey) => {
+/**
+ * @param {React.Component} Component
+ * @param {string} windowKey
+ * @param {{ title?: string | ((data: any) => string), windowClassName?: string, HeaderSlot?: React.Component }} options
+ */
+const WindowWrapper = (Component, windowKey, options = {}) => {
   const Wrapped = (props) => {
     return (
       <WindowWrapperClient
         Component={Component}
         windowKey={windowKey}
+        {...options}
         {...props}
       />
     );

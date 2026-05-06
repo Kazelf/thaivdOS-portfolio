@@ -3,11 +3,19 @@ import React from "react";
 import { XIcon, ChevronLeft } from "lucide-react";
 import useWindowStore from "../store/window";
 import useFolderStore from "../store/folder";
+import { useIsDesktop } from "../hooks";
 
-const WindowControls = ({ target, canGoBack = false }) => {
+const WindowControls = ({ target }) => {
   const { closeWindow } = useWindowStore();
-  const { goBack } = useFolderStore();
-  const showGoBack = canGoBack && target === "finder";
+  const { goBack, currentFolder } = useFolderStore();
+  const { isDesktopRaw } = useIsDesktop();
+
+  // canGoBack chỉ áp dụng cho Finder và khi ở mobile
+  const showGoBack =
+    target === "finder" &&
+    !isDesktopRaw &&
+    currentFolder &&
+    currentFolder.id !== "root";
 
   return (
     <div className="flex gap-2">
