@@ -32,6 +32,7 @@ const SafariHeaderSlot = () => {
           type="text"
           placeholder="Search or enter website name"
           className="flex-1 font-normal"
+          disabled
         />
       </div>
 

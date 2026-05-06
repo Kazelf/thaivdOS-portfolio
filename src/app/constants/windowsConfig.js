@@ -1,17 +1,27 @@
-const INITIAL_Z_INDEX = 1000;
+const INITIAL_Z_INDEX = 3000;
+
+const createWindowState = () => ({
+  isOpen: false,
+  isMinimized: false,
+  isFullscreen: false,
+  zIndex: INITIAL_Z_INDEX,
+  data: null,
+  bounds: null,
+  lastNormalBounds: null,
+});
 
 const WINDOW_CONFIG = {
-  finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  vscode: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  wordle: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  finder: createWindowState(),
+  contact: createWindowState(),
+  resume: createWindowState(),
+  safari: createWindowState(),
+  spotify: createWindowState(),
+  vscode: createWindowState(),
+  photos: createWindowState(),
+  terminal: createWindowState(),
+  wordle: createWindowState(),
+  txtfile: createWindowState(),
+  imgfile: createWindowState(),
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };

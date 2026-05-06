@@ -56,7 +56,7 @@ const Finder = () => {
   );
 
   return (
-    <div className="grid grid-cols-4 max-lg:grid-cols-1 bg-base-200">
+    <div className="grid grid-cols-4 h-full max-lg:grid-cols-1 bg-base-200">
       <div className="side-bar max-lg:hidden col-span-1 p-3 bg-base border-r border-r-base-300">
         {renderList("Favourites", Object.values(locations))}
         {renderList("My Projects", locations.work.children)}
