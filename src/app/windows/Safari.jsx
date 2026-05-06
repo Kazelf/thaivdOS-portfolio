@@ -104,8 +104,8 @@ const Safari = () => {
         {wifi ? (
           <>
             <div className="flex flex-col gap-10">
-              {renderTimeLine("Activities", activities, Calendar)}
               {renderTimeLine("Experiences", experiences, Briefcase)}
+              {renderTimeLine("Activities", activities, Calendar)}
             </div>
             <div>{renderTimeLine("Achievements", achievements, Trophy)}</div>
           </>

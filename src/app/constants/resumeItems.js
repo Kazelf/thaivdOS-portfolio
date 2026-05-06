@@ -74,10 +74,13 @@ const achievements = [
 const experiences = [
   {
     id: 1,
-    date: "Error",
-    title: "Error 404",
-    role: "Backend Developer",
-    description: ["Not Found"],
+    date: "May 2026 - Present",
+    title: "Viettel Digital Talent Program",
+    role: "Software Engineering Track",
+    description: [
+      "Selected for Viettel flagship tech talent program (500 positions across 9 high-tech domains).",
+      "Received intensive training in software engineering fundamentals, system design, and best practices.",
+    ],
   },
 ];
 
