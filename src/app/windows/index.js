@@ -3,6 +3,7 @@ import Resume from "./Resume";
 import Finder from "./Finder";
 import Safari from "./Safari";
 import Contact from "./Contact";
+import Youtube from "./Youtube";
 import Text from "./Text";
 import ImageWindow from "./ImageFile";
 import Spotify from "./Spotify";
@@ -15,6 +16,7 @@ export {
   Finder,
   Safari,
   Contact,
+  Youtube,
   Spotify,
   Text,
   ImageWindow,

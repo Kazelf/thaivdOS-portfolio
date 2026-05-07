@@ -5,6 +5,7 @@ import {
   Resume,
   Finder,
   Contact,
+  Youtube,
   Text,
   ImageWindow,
   Safari,
@@ -41,6 +42,7 @@ const Desktop = () => {
       <Finder />
       <Safari />
       <Contact />
+      <Youtube />
       <Text />
       <ImageWindow />
 

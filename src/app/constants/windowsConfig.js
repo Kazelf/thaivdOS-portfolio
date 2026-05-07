@@ -15,6 +15,7 @@ const WINDOW_CONFIG = {
   contact: createWindowState(),
   resume: createWindowState(),
   safari: createWindowState(),
+  youtube: createWindowState(),
   spotify: createWindowState(),
   vscode: createWindowState(),
   photos: createWindowState(),
