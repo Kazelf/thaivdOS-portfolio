@@ -1,4 +1,4 @@
-const INITIAL_Z_INDEX = 3000;
+const INITIAL_Z_INDEX = 1000;
 
 const createWindowState = () => ({
   isOpen: false,

@@ -52,7 +52,7 @@ const ScreenApps = () => {
   );
 
   return (
-    <section className="absolute w-full top-10 left-0 z-0 max-lg:z-20 p-4 flex justify-between">
+    <section className="absolute w-full top-10 left-0 z-20 p-4 flex justify-between">
       <div className="flex flex-col gap-2 text-white">
         <h3 className="text-center font-semibold text-lg italic">My Resume</h3>
         {renderApps(screenApps)}
