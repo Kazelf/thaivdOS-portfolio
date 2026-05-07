@@ -114,14 +114,7 @@ const WindowWrapperClient = ({
         y: bounds?.y ?? 0,
       });
     }
-  }, [
-    isOpen,
-    isFullscreen,
-    bounds,
-    isDesktopSafe,
-    setWindowBounds,
-    windowKey,
-  ]);
+  }, [isOpen, isFullscreen, bounds, isDesktopSafe, setWindowBounds, windowKey]);
 
   return (
     <section
@@ -146,7 +139,7 @@ const WindowWrapperClient = ({
       >
         <div className="window-header">
           <WindowControls target={windowKey} />
-          {resolvedTitle && <h2>{resolvedTitle}</h2>}
+          {resolvedTitle && <h2 className="w-full">{resolvedTitle}</h2>}
           {HeaderSlot && <HeaderSlot />}
         </div>
 

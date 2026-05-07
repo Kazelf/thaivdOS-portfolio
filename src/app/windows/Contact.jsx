@@ -2,8 +2,13 @@ import React from "react";
 import Image from "next/image";
 import WindowWrapper from "../hoc/WindowWrapper";
 import { socialLinks } from "../constants";
+import useWindowStore from "../store/window";
 
 const Contact = () => {
+  const isFullscreen = useWindowStore(
+    (state) => state.windows.contact?.isFullscreen,
+  );
+
   return (
     <div className="window-content space-y-5">
       <Image
@@ -17,14 +22,19 @@ const Contact = () => {
       <h3 className="font-bold">Let's connect</h3>
       <p>Got an idea? Or just wanna talk tech? Contact me now!</p>
       <p>
-        <span className="font-semibold">My Email:</span>{" "}
-        vudinhthai081106@gmail.com
+        <strong>My Email:</strong> vudinhthai081106@gmail.com
       </p>
 
-      <ul className="grid grid-cols-4 max-md:grid-cols-1 gap-2">
+      <ul
+        className={`grid grid-cols-4 max-md:grid-cols-1 gap-2 ${
+          isFullscreen ? "h-[calc(100%-18rem)]" : ""
+        }`}
+      >
         {socialLinks.map((item) => (
           <li
-            className="p-2 col-span-1 rounded-lg transition-transform duration-200 ease-out hover:scale-105"
+            className={`p-2 col-span-1 rounded-lg transition-transform duration-200 ease-out hover:scale-105 ${
+              isFullscreen ? "h-full min-h-28" : ""
+            }`}
             key={item.id}
             style={{ backgroundColor: item.bg }}
           >
@@ -33,9 +43,22 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               title={item.text}
+              className={
+                isFullscreen ? "h-full flex flex-col justify-center" : ""
+              }
             >
-              <img src={item.icon} alt={item.text} className="w-6 h-6 mb-4" />
-              <p className="text-sm text-white font-semibold">{item.text}</p>
+              <img
+                src={item.icon}
+                alt={item.text}
+                className={`mb-4 ${isFullscreen ? "w-10 h-10" : "w-7 h-7"}`}
+              />
+              <p
+                className={`text-white font-semibold ${
+                  isFullscreen ? "text-lg" : "text-base"
+                }`}
+              >
+                {item.text}
+              </p>
             </a>
           </li>
         ))}
