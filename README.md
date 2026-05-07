@@ -56,14 +56,6 @@ npm install
 ```bash
 npm run dev
 ```
-## Change Logs
-
-- **2026.01.21**: Change control center.
-- **2026.01.18**: Add Spotify app.
-- **2026.01.09**: Add loading screen.
-- **2026.01.04**: Add dark theme.
-- **2026.01.02**: Add features: wifi, settings.
-- **2026.01.01**: Add mobile version.
 
 ## Credits
 

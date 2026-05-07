@@ -13,6 +13,8 @@ const useWordleStore = create(
     status: "playing", // playing | won | lost
     keyStatuses: {}, // { char 'A': 'correct' | 'present' | 'absent' }
     message: "",
+    showInfo: true,
+    toggleInfo: () => set((state) => { state.showInfo = !state.showInfo; }),
 
     addLetter: (letter) => {
       set((state) => {
