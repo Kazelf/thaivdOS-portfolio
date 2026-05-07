@@ -17,6 +17,7 @@ const WindowWrapperClient = ({
   const { isOpen, isFullscreen, zIndex, data, bounds } = windows[windowKey];
   const ref = useRef(null);
   const { isDesktopSafe } = useIsDesktop();
+  const effectiveZIndex = isDesktopSafe ? (isFullscreen ? 3000 : zIndex) : 3000;
 
   const resolvedTitle = typeof title === "function" ? title(data) : title;
 
@@ -120,7 +121,7 @@ const WindowWrapperClient = ({
     <section
       id={windowKey}
       ref={ref}
-      style={{ zIndex }}
+      style={{ zIndex: effectiveZIndex }}
       className={`fixed hidden ${
         isFullscreen ? "inset-0" : "top-0 lg:top-1/12"
       }`}
