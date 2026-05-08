@@ -11,6 +11,8 @@ const WORK_LOCATION = {
       name: "Soul Sync Website",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
+      category: "Web",
+      techStack: ["ReactJS", "Node.js", "Express.js", "MongoDB", "Socket.IO"],
       children: [
         {
           id: 1,
@@ -57,6 +59,8 @@ const WORK_LOCATION = {
       name: "JS Codefest 2025 SDK",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
+      category: "Tech Lead",
+      techStack: ["Java", "Socket.IO"],
       children: [
         {
           id: 1,
@@ -76,20 +80,21 @@ const WORK_LOCATION = {
         },
         {
           id: 2,
-          name: "logo.png",
-          icon: "/icons/finder/png.svg",
-          kind: "file",
-          fileType: "img",
-          image: "/images/projects/codefest2025.png",
-        },
-        {
-          id: 3,
           name: "j-surviv-game.png",
           icon: "/icons/finder/png.svg",
           kind: "file",
           fileType: "img",
           image: "/images/projects/j-surviv.png",
         },
+        {
+          id: 3,
+          name: "logo.png",
+          icon: "/icons/finder/png.svg",
+          kind: "file",
+          fileType: "img",
+          image: "/images/projects/codefest2025.png",
+        },
+
         {
           id: 4,
           name: "landingpage.com",
@@ -105,6 +110,8 @@ const WORK_LOCATION = {
       name: "thaivdOS Portfolio",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
+      category: "Fullstack",
+      techStack: ["Next.js", "Tailwind CSS", "Zustand", "Immer", "GSAP"],
       children: [
         {
           id: 1,

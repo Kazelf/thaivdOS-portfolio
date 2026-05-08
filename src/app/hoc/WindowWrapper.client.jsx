@@ -134,6 +134,7 @@ const WindowWrapperClient = ({
                 width: "100vw",
                 height: "100dvh",
                 minHeight: "100dvh",
+                borderRadius: 0,
               }
             : undefined
         }
