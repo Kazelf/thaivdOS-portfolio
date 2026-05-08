@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import WindowWrapper from "../hoc/WindowWrapper";
 import { locations } from "../constants";
 import useWindowStore from "../store/window";
+import { useIsDesktop } from "../hooks";
 
 const projects = locations?.work?.children ?? [];
 
@@ -50,17 +51,18 @@ const FilterTabs = ({ filters, activeFilter, onChange }) => {
   );
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, isFullscreen }) => {
   const image = project.images[0] || "/images/wallpaper.png";
 
   return (
-    <article className="group h-full rounded-2xl p-2 transition-all duration-300 hover:bg-base-200 hover:shadow-[0_0_30px_rgba(255,0,0,0.12)]">
+    <article className="group h-full border border-transparent rounded-2xl p-2 transition-all duration-300 hover:bg-base-200 hover:border-base-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.12)]">
       <div className="relative mb-3 overflow-hidden rounded-xl">
         <img
           src={image}
           alt={project.title}
-          className="h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 border border-base-300 ${isFullscreen ? "h-50" : "h-34"}`}
         />
+
         <span className="absolute bottom-2 right-2 rounded-full border border-base-300/80 bg-base/90 px-2.5 py-1 text-xs font-semibold text-base-foreground">
           {project.itemsCount} items
         </span>
@@ -81,6 +83,7 @@ const Youtube = () => {
   const isFullscreen = useWindowStore(
     (state) => state.windows.youtube?.isFullscreen,
   );
+  const { isDesktopSafe } = useIsDesktop();
   const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
 
   const normalizedProjects = useMemo(
@@ -129,13 +132,14 @@ const Youtube = () => {
         <input
           type="search"
           placeholder="Search projects..."
-          className="w-full max-w-xs rounded-full border border-base-300 bg-base px-4 py-2 text-sm text-base-foreground/50 outline-none"
+          className="max-lg:hidden w-full max-w-xs rounded-full border border-base-300 text-sm bg-base p-2"
           aria-label="Search for projects"
+          disabled
         />
       </header>
 
       <section className="flex p-4 min-h-0 flex-1">
-        <aside className="w-40 shrink-0 rounded-xl border border-base-300 bg-base-200 p-3">
+        <aside className="max-sm:hidden w-40 shrink-0 rounded-xl border border-base-300 bg-base-200 p-3">
           <FilterTabs
             filters={filters}
             activeFilter={activeFilter}
@@ -145,12 +149,16 @@ const Youtube = () => {
 
         <div className="min-h-0 flex-1 overflow-y-auto">
           <div
-            className={`grid pl-4 pb-4 gap-6 transition-all duration-300 ${
+            className={`max-sm:grid-cols-1 grid pl-4 pb-4 gap-6 transition-all duration-300 ${
               isFullscreen ? "grid-cols-3" : "grid-cols-2"
             }`}
           >
             {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                isFullscreen={isFullscreen}
+              />
             ))}
           </div>
         </div>

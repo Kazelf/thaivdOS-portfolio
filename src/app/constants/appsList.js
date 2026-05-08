@@ -78,6 +78,12 @@ const screenApps = [
     icon: "/icons/apps/safari.svg",
   },
   {
+    id: "youtube",
+    name: "Projects",
+    kind: "app",
+    icon: "/icons/apps/youtube.png",
+  },
+  {
     id: "terminal",
     name: "Skills",
     kind: "app",
