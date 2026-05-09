@@ -6,7 +6,7 @@ import SystemMenu from "./navbar/SystemMenu";
 
 import HeroSection from "./HeroSection";
 import Dock from "./Dock";
-import WindowControls from "./WindowControls";
+import WindowControls from "./headerslot/WindowControls";
 import ScreenApps from "./ScreenApps";
 import Breadcrumb from "./Breadcrumb";
 
