@@ -1,9 +1,13 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import WindowWrapper from "../hoc/WindowWrapper";
+import { Bell, Search, TvMinimalPlay } from "lucide-react";
+import { gsap, useGSAP } from "@/lib/gsapClient";
 import { locations } from "../constants";
 import useWindowStore from "../store/window";
-import { useIsDesktop } from "../hooks";
+import useSystemStore from "../store/system";
+import ProjectDetailView from "../components/youtube/ProjectDetailView";
 
 const projects = locations?.work?.children ?? [];
 
@@ -18,12 +22,6 @@ const getProjectImages = (project) =>
   project.children
     ?.filter((child) => child.fileType === "img" && child.image)
     .map((child) => child.image) ?? [];
-
-const getProjectType = (project) => {
-  if (project.type) return project.type;
-  const hasUrl = project.children?.some((child) => child.fileType === "url");
-  return hasUrl ? "Web" : "Project";
-};
 
 const FILTER_ALL = "All";
 
@@ -51,16 +49,19 @@ const FilterTabs = ({ filters, activeFilter, onChange }) => {
   );
 };
 
-const ProjectCard = ({ project, isFullscreen }) => {
+const ProjectCard = ({ project, isFullscreen, onClick }) => {
   const image = project.images[0] || "/images/wallpaper.png";
 
   return (
-    <article className="group h-full border border-transparent rounded-2xl p-2 transition-all duration-300 hover:bg-base-200 hover:border-base-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.12)]">
-      <div className="relative mb-3 overflow-hidden rounded-xl">
+    <article
+      onClick={() => onClick(project.id)}
+      className="group h-full cursor-pointer border border-transparent p-2 transition-all duration-300 hover:bg-base-200 hover:border-base-foreground hover:shadow-[0_0_22px_rgba(10,132,255,0.2)]"
+    >
+      <div className="relative mb-3 border border-base-300 overflow-hidden ">
         <img
           src={image}
           alt={project.title}
-          className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 border border-base-300 ${isFullscreen ? "h-50" : "h-34"}`}
+          className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 ${isFullscreen ? "h-50" : "h-34"}`}
         />
 
         <span className="absolute bottom-2 right-2 rounded-full border border-base-300/80 bg-base/90 px-2.5 py-1 text-xs font-semibold text-base-foreground">
@@ -68,13 +69,24 @@ const ProjectCard = ({ project, isFullscreen }) => {
         </span>
       </div>
 
-      <h3 className="line-clamp-1 text-lg font-bold leading-snug text-base-foreground">
-        {project.title}
-      </h3>
+      <div className="flex items-center gap-2">
+        <Image
+          className="rounded-full p-1 object-cover"
+          src={"/images/vudinhthai.png"}
+          height={30}
+          width={40}
+          alt="Me.png"
+        />
 
-      <p className="mt-1 line-clamp-1 text-sm text-base-foreground/70">
-        {project.category} • {project.type}
-      </p>
+        <div>
+          <h5 className="line-clamp-1 text-sm font-semibold leading-snug text-base-foreground">
+            {project.title}
+          </h5>
+          <p className="line-clamp-1 text-xs text-base-foreground/70">
+            {project.role} • {project.category}
+          </p>
+        </div>
+      </div>
     </article>
   );
 };
@@ -83,18 +95,37 @@ const Youtube = () => {
   const isFullscreen = useWindowStore(
     (state) => state.windows.youtube?.isFullscreen,
   );
-  const { isDesktopSafe } = useIsDesktop();
+
+  const wifi = useSystemStore((state) => state.wifi);
   const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [currentProjectImageIndex, setCurrentProjectImageIndex] = useState(0);
+  const [projectViewMode, setProjectViewMode] = useState("list");
+  const [savedScrollTop, setSavedScrollTop] = useState(0);
+  const listRef = useRef(null);
+  const viewRef = useRef(null);
 
   const normalizedProjects = useMemo(
     () =>
       projects.map((project) => ({
         id: project.id,
         title: project.name,
-        category: project.category || "Other",
-        type: getProjectType(project),
-        images: getProjectImages(project),
+        brief: getProjectDescription(project),
         description: getProjectDescription(project),
+        thumbnail: getProjectImages(project)[0] || "/images/wallpaper.png",
+        type: project.kind === "folder" ? "Project" : project.kind,
+        author: "Vudinhthai",
+        avatar: "/images/vudinhthai.png",
+        tags: project.techStack || [],
+        links:
+          project.children
+            ?.filter((child) => child.fileType === "url" && child.url)
+            .map((child) => child.url) || [],
+        year: null,
+        category: project.category || "Other",
+        role: project.role || "Developer",
+        images: getProjectImages(project),
         itemsCount: project.children?.length ?? 0,
       })),
     [],
@@ -111,20 +142,68 @@ const Youtube = () => {
     return normalizedProjects.filter((project) => {
       const matchCategory =
         activeFilter === FILTER_ALL || project.category === activeFilter;
-      return matchCategory;
+      const matchSearch = project.title
+        .toLowerCase()
+        .includes(searchTerm.trim().toLowerCase());
+      return matchCategory && matchSearch;
     });
-  }, [activeFilter, normalizedProjects]);
+  }, [activeFilter, normalizedProjects, searchTerm]);
+
+  const selectedProject = useMemo(
+    () =>
+      normalizedProjects.find((project) => project.id === selectedProjectId) ||
+      null,
+    [normalizedProjects, selectedProjectId],
+  );
+
+  const suggestedProjects = useMemo(
+    () =>
+      normalizedProjects.filter((project) => project.id !== selectedProjectId),
+    [normalizedProjects, selectedProjectId],
+  );
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
   };
 
+  const openDetail = (projectId) => {
+    const currentScroll = listRef.current?.scrollTop || 0;
+    setSavedScrollTop(currentScroll);
+    setSelectedProjectId(projectId);
+    setCurrentProjectImageIndex(0);
+    setProjectViewMode("detail");
+  };
+
+  const handleBack = () => {
+    setProjectViewMode("list");
+    window.requestAnimationFrame(() => {
+      if (listRef.current) listRef.current.scrollTop = savedScrollTop;
+    });
+  };
+
+  const selectSuggestedProject = (projectId) => {
+    setSelectedProjectId(projectId);
+    setCurrentProjectImageIndex(0);
+  };
+
+  useGSAP(
+    () => {
+      if (!viewRef.current) return;
+      gsap.fromTo(
+        viewRef.current,
+        { opacity: 0.35, y: 12 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
+      );
+    },
+    { dependencies: [projectViewMode, selectedProjectId] },
+  );
+
   return (
     <div className="window-content flex flex-col bg-base overflow-y-hidden! p-0! h-full min-h-0">
       <header className="p-2 flex shrink-0 items-center justify-between border-b border-b-base-300 bg-base-200">
-        <div className="flex items-center gap-3">
-          <span className="h-6 w-2 rounded-full bg-red-500" />
-          <h2 className="text-sm font-bold tracking-wide text-base-foreground">
+        <div className="flex-center gap-2">
+          <TvMinimalPlay className="h-10 text-red-500" />
+          <h2 className="text-lg font-semibold tracking-wide text-base-foreground">
             MyProjects
           </h2>
         </div>
@@ -134,8 +213,20 @@ const Youtube = () => {
           placeholder="Search projects..."
           className="max-lg:hidden w-full max-w-xs rounded-full border border-base-300 text-sm bg-base p-2"
           aria-label="Search for projects"
-          disabled
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
         />
+
+        <div className="flex-center">
+          <Bell className="icon" />
+          <Image
+            className="rounded-full p-1 object-cover"
+            src={"/images/vudinhthai.png"}
+            height={30}
+            width={40}
+            alt="Me.png"
+          />
+        </div>
       </header>
 
       <section className="flex p-4 min-h-0 flex-1">
@@ -147,20 +238,52 @@ const Youtube = () => {
           />
         </aside>
 
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          <div
-            className={`max-sm:grid-cols-1 grid pl-4 pb-4 gap-6 transition-all duration-300 ${
-              isFullscreen ? "grid-cols-3" : "grid-cols-2"
-            }`}
-          >
-            {filteredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isFullscreen={isFullscreen}
-              />
-            ))}
-          </div>
+        <div ref={viewRef} className="pl-4 pb-4 min-h-0 flex-1 overflow-hidden">
+          {wifi && projectViewMode === "detail" && selectedProject ? (
+            <ProjectDetailView
+              project={selectedProject}
+              projects={suggestedProjects}
+              isFullscreen={Boolean(isFullscreen)}
+              currentImageIndex={currentProjectImageIndex}
+              onImageChange={setCurrentProjectImageIndex}
+              onBack={handleBack}
+              onSelectProject={selectSuggestedProject}
+            />
+          ) : wifi ? (
+            <div ref={listRef} className="h-full overflow-y-auto">
+              <div className="mb-3 hidden max-lg:flex items-center gap-2 rounded-full border border-base-300 bg-base px-3 py-2 text-sm text-base-foreground/70">
+                <Search className="h-4 w-4" />
+                <input
+                  type="search"
+                  placeholder="Search projects..."
+                  className="w-full bg-transparent outline-none"
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                />
+              </div>
+
+              <div
+                className={`max-sm:grid-cols-1 grid ${
+                  isFullscreen ? "grid-cols-3" : "grid-cols-2"
+                }`}
+              >
+                {filteredProjects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    isFullscreen={isFullscreen}
+                    onClick={openDetail}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="h-full col-center gap-3">
+              <p className="text-center text-2xl font-bold text-base-foreground/70">
+                You have no internet
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </div>

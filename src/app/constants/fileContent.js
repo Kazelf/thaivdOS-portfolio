@@ -12,6 +12,7 @@ const WORK_LOCATION = {
       icon: "/icons/finder/folder.svg",
       kind: "folder",
       category: "Web",
+      role: "Backend Developer",
       techStack: ["ReactJS", "Node.js", "Express.js", "MongoDB", "Socket.IO"],
       children: [
         {
@@ -59,7 +60,8 @@ const WORK_LOCATION = {
       name: "JS Codefest 2025 SDK",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
-      category: "Tech Lead",
+      category: "Game SDK",
+      role: "SDK Developer",
       techStack: ["Java", "Socket.IO"],
       children: [
         {
@@ -110,7 +112,8 @@ const WORK_LOCATION = {
       name: "thaivdOS Portfolio",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
-      category: "Fullstack",
+      category: "Web",
+      role: "Fullstack Developer",
       techStack: ["Next.js", "Tailwind CSS", "Zustand", "Immer", "GSAP"],
       children: [
         {
@@ -148,6 +151,9 @@ const WORK_LOCATION = {
       name: "When Dreams Are Forgotten",
       icon: "/icons/finder/folder.svg",
       kind: "folder",
+      category: "Web",
+      role: "Fullstack Developer",
+      techStack: ["Next.js", "Tailwind CSS", "Framer Motion"],
       children: [
         {
           id: 1,
