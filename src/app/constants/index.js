@@ -1,5 +1,5 @@
-import { navLinks } from "./navItems";
-export { navLinks };
+import { navLinks, SYSTEM_COLOR_PALETTE } from "./navItems";
+export { navLinks, SYSTEM_COLOR_PALETTE };
 
 import { dockApps, screenApps } from "./appsList";
 export { dockApps, screenApps };

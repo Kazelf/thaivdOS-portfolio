@@ -88,14 +88,14 @@ const HeroSection = () => {
         <p ref={subtitleRef}>
           {renderText(
             "Hey, welcome to my portfolio! I'm",
-            "text-xl md:text-3xl font-georama text-primary-foreground",
-            100
+            "text-xl md:text-3xl font-georama text-white",
+            100,
           )}
         </p>
         <h1 ref={titleRef}>
           {renderText(
             "Vu Dinh Thai",
-            "text-4xl text-primary-foreground md:text-8xl italic font-georama"
+            "text-4xl text-white md:text-8xl italic font-georama",
           )}
         </h1>
       </div>

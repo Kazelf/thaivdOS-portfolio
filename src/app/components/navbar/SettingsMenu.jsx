@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Tooltip } from "react-tooltip";
 import { useTheme } from "next-themes";
@@ -19,6 +19,17 @@ import {
 } from "lucide-react";
 import MenuWrapper from "@/app/hoc/MenuWrapper";
 import { useSystemStore, useLocationStore, useWindowStore } from "@/app/store";
+import { SYSTEM_COLOR_PALETTE } from "@/app/constants";
+
+const applySystemColor = (palette) => {
+  if (typeof window === "undefined") return;
+
+  const root = document.documentElement;
+  root.style.setProperty("--primary", palette.primary);
+  root.style.setProperty("--primary-200", palette.primary200);
+  root.style.setProperty("--primary-300", palette.primary300);
+  root.style.setProperty("--primary-foreground", palette.foreground);
+};
 
 const ControlButton = React.memo(
   ({ name, description, active, onToggle, Icon }) => {
@@ -54,6 +65,16 @@ const SettingsMenu = () => {
   const dark = theme === "dark";
   const toggleDark = () => {
     setTheme(dark ? "light" : "dark");
+  };
+
+  const [activeSystemColor, setActiveSystemColor] = useState("blue");
+
+  const handleSystemColorChange = (colorKey) => {
+    const palette = SYSTEM_COLOR_PALETTE[colorKey];
+    if (!palette) return;
+
+    setActiveSystemColor(colorKey);
+    applySystemColor(palette);
   };
 
   const wifi = useSystemStore((s) => s.wifi);
@@ -126,6 +147,25 @@ const SettingsMenu = () => {
           </button>
 
           <SkipForward />
+        </div>
+      </div>
+
+      <div className="col-span-4 cc-box flex-col justify-center">
+        <p className="font-medium text-sm">System Color</p>
+        <div className="grid grid-cols-7 gap-2 text-base-foreground/70">
+          {Object.keys(SYSTEM_COLOR_PALETTE).map((colorKey) => (
+            <div
+              key={colorKey}
+              className={clsx(
+                "w-6 h-6 rounded-full cursor-pointer border border-base-foreground/20",
+                activeSystemColor === colorKey && "ring-2 ring-primary",
+              )}
+              style={{
+                backgroundColor: SYSTEM_COLOR_PALETTE[colorKey].primary,
+              }}
+              onClick={() => handleSystemColorChange(colorKey)}
+            />
+          ))}
         </div>
       </div>
 
