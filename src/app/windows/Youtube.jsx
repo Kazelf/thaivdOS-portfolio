@@ -6,10 +6,8 @@ import { Bell, TvMinimalPlay } from "lucide-react";
 import { locations } from "../constants";
 import useWindowStore from "../store/window";
 import useSystemStore from "../store/system";
-import ProjectDetailView from "../components/youtube/ProjectDetailView";
-import FilterTabs from "../components/youtube/FilterTabs";
-import ProjectListItem from "../components/youtube/ProjectListItem";
-import useProjectFilters from "../hooks/useProjectFilters";
+import { ProjectDetailView, ProjectListItem, TabsList } from "../components";
+import { useProjectFilters } from "../hooks";
 
 const projects = locations?.work?.children ?? [];
 
@@ -112,10 +110,15 @@ const Youtube = () => {
 
       <section className="flex p-4 min-h-0 flex-1">
         <aside className="max-sm:hidden w-40 shrink-0 rounded-xl border border-base-300 bg-base-200 p-3">
-          <FilterTabs
-            filters={filters}
-            activeFilter={activeFilter}
-            onChange={(filter) => setActiveFilter(filter)}
+          <TabsList
+            items={filters}
+            activeId={activeFilter}
+            onSelect={setActiveFilter}
+            listClassName="flex flex-col gap-2"
+            itemClassName="w-full rounded-lg border-l-2 px-4 py-2 text-left text-sm font-semibold"
+            activeClassName="border-l-red-500 bg-base-300 text-base-foreground"
+            inactiveClassName="border-l-transparent bg-base text-base-foreground hover:bg-base-300"
+            renderItem={(filter) => <span>{filter}</span>}
           />
         </aside>
 
