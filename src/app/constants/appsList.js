@@ -32,6 +32,12 @@ const dockApps = [
     icon: "terminal.png",
   },
   {
+    id: "youtube",
+    name: "Projects",
+    kind: "app",
+    icon: "youtube.png",
+  },
+  {
     id: "spotify",
     name: "Spotify",
     kind: "app",
@@ -70,6 +76,12 @@ const screenApps = [
     name: "Experiences",
     kind: "app",
     icon: "/icons/apps/safari.svg",
+  },
+  {
+    id: "youtube",
+    name: "Projects",
+    kind: "app",
+    icon: "/icons/apps/youtube.png",
   },
   {
     id: "terminal",

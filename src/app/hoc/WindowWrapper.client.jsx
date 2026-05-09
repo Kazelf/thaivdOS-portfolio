@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef } from "react";
 import useWindowStore from "../store/window";
 import { gsap, useGSAP, Draggable } from "@/lib/gsapClient";
 import { useIsDesktop } from "../hooks";
-import WindowControls from "../components/WindowControls";
+import { WindowControls } from "../components";
 
 const WindowWrapperClient = ({
   Component,
@@ -134,6 +134,7 @@ const WindowWrapperClient = ({
                 width: "100vw",
                 height: "100dvh",
                 minHeight: "100dvh",
+                borderRadius: 0,
               }
             : undefined
         }

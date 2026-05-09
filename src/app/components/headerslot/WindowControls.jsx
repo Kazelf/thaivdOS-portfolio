@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
 import { XIcon, ChevronLeft, Minus, Maximize2, Minimize2 } from "lucide-react";
-import useWindowStore from "../store/window";
-import useFolderStore from "../store/folder";
-import { useIsDesktop } from "../hooks";
+import useWindowStore from "@/app/store/window";
+import useFolderStore from "@/app/store/folder";
+import { useIsDesktop } from "@/app/hooks";
 
 const WindowControls = ({ target }) => {
-  const { closeWindow, toggleFullscreenWindow, windows } =
-    useWindowStore();
+  const { closeWindow, toggleFullscreenWindow, windows } = useWindowStore();
   const { goBack, currentFolder } = useFolderStore();
   const { isDesktopSafe } = useIsDesktop();
   const isFullscreen = windows[target]?.isFullscreen;

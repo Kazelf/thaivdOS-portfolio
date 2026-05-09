@@ -11,6 +11,11 @@ const navLinks = [
   },
   {
     id: 3,
+    name: "Projects",
+    type: "youtube",
+  },
+  {
+    id: 4,
     name: "Contact",
     type: "contact",
   },

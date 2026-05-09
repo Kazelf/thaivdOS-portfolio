@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import WindowWrapper from "../hoc/WindowWrapper";
+import { TabsList } from "../components";
 import { useLocationStore, useSystemStore } from "../store";
 import { musics } from "../constants";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
@@ -61,38 +61,31 @@ const Spotify = () => {
     setActiveSong(allSongs[prevIndex]);
   };
 
-  const renderList = (items, activeItem, setActiveItem) => (
-    <>
-      <ul>
-        {items.map((item) => (
-          <li
-            key={item.id}
-            onClick={() => setActiveItem(item)}
-            className={clsx(
-              "h-10",
-              item.id === activeItem.id ? "active" : "not-active",
-            )}
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="h-full rounded-sm"
-            />
-            <div>
-              <p className="text-sm font-medium truncate">{item.name}</p>
-              {item.author && <p className="text-xs truncate">{item.author}</p>}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-
   return (
     <div className="p-0 grid grid-cols-12 h-full min-h-0">
       <div className="side-bar max-lg:hidden col-span-3 p-3 bg-base border-r border-r-base-300">
-        <h3>Categories</h3>
-        {renderList(Object.values(musics), musicCategory, setMusicCategory)}
+        <TabsList
+          title="Categories"
+          items={Object.values(musics)}
+          activeId={musicCategory?.id}
+          onSelect={setMusicCategory}
+          itemClassName="h-10"
+          renderItem={(item) => (
+            <>
+              <img
+                src={item.image}
+                alt={item.name}
+                className="h-full rounded-sm"
+              />
+              <div>
+                <p className="text-sm font-medium truncate">{item.name}</p>
+                {item.author ? (
+                  <p className="text-xs truncate">{item.author}</p>
+                ) : null}
+              </div>
+            </>
+          )}
+        />
       </div>
 
       <div className="side-bar flex-1 min-h-0 overflow-y-auto col-span-5 p-3 no-scrollbar">
@@ -107,17 +100,35 @@ const Spotify = () => {
         </div>
         <hr className="my-4 opacity-20" />
         <p className="mb-2 text-sm">{musicCategory.children.length} songs</p>
-        {renderList(musicCategory?.children, activeSong, setActiveSong)}
+        <TabsList
+          items={musicCategory?.children}
+          activeId={activeSong?.id}
+          onSelect={setActiveSong}
+          itemClassName="h-10"
+          renderItem={(item) => (
+            <>
+              <img
+                src={item.image}
+                alt={item.name}
+                className="h-full rounded-sm"
+              />
+              <div>
+                <p className="text-sm font-medium truncate">{item.name}</p>
+                {item.author ? (
+                  <p className="text-xs truncate">{item.author}</p>
+                ) : null}
+              </div>
+            </>
+          )}
+        />
       </div>
 
       <div className="col-span-4 flex-center flex-col bg-secondary/50 text-secondary-foreground m-4 p-6 rounded-2xl">
         <img
           src={activeSong.image}
           alt={activeSong.name}
-          className={clsx(
-            "w-full rounded-full shadow-lg mb-3 p-2",
-            audioPlaying ? "spin" : "spin-paused",
-          )}
+          className={`
+            w-full rounded-full shadow-lg mb-3 p-2 ${audioPlaying ? "spin" : "spin-paused"}`}
         />
         <h3 className="font-semibold text-shadow-2xs">{activeSong.name}</h3>
         <p className="text-sm text-shadow-2xs">{activeSong.author}</p>

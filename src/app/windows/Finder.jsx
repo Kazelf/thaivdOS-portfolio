@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import WindowWrapper from "../hoc/WindowWrapper";
-import { Breadcrumb } from "../components";
+import { Breadcrumb, TabsList } from "../components";
 import { Search } from "lucide-react";
 import { locations } from "../constants";
 import useLocationStore from "../store/location";
@@ -35,31 +34,33 @@ const Finder = () => {
     openWindow(`${item.fileType}${item.kind}`, item);
   };
 
-  const renderList = (name, items) => (
-    <>
-      <h3>{name}</h3>
-      <ul>
-        {items.map((item) => (
-          <li
-            key={item.id}
-            onClick={() => setActiveLocation(item)}
-            className={clsx(
-              item.id === activeLocation.id ? "active" : "not-active",
-            )}
-          >
-            <Image src={item.icon} alt={item.name} width={16} height={16} />
-            <p className="text-sm font-medium truncate">{item.name}</p>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-
   return (
     <div className="grid grid-cols-4 h-full max-lg:grid-cols-1 bg-base-200">
       <div className="side-bar max-lg:hidden col-span-1 p-3 bg-base border-r border-r-base-300">
-        {renderList("Favourites", Object.values(locations))}
-        {renderList("My Projects", locations.work.children)}
+        <TabsList
+          title="Favourites"
+          items={Object.values(locations)}
+          activeId={activeLocation?.id}
+          onSelect={setActiveLocation}
+          renderItem={(item) => (
+            <>
+              <Image src={item.icon} alt={item.name} width={16} height={16} />
+              <p className="text-sm font-medium truncate">{item.name}</p>
+            </>
+          )}
+        />
+        <TabsList
+          title="My Projects"
+          items={locations.work.children}
+          activeId={activeLocation?.id}
+          onSelect={setActiveLocation}
+          renderItem={(item) => (
+            <>
+              <Image src={item.icon} alt={item.name} width={16} height={16} />
+              <p className="text-sm font-medium truncate">{item.name}</p>
+            </>
+          )}
+        />
       </div>
 
       <div className="content p-4 col-span-3">
