@@ -17,7 +17,7 @@ const SuggestedProjects = ({ projects, onSelect }) => {
               className={`flex gap-2 w-full rounded-xl border border-transparent p-2 text-left bg-base/60 hover:border-base-foreground/40`}
             >
               <img
-                src={project.thumbnail || "/images/wallpaper.png"}
+                src={project.images[0] || "/images/wallpaper.png"}
                 alt={project.title}
                 className="h-20 w-30 rounded-lg border border-base-300 object-cover"
               />
@@ -26,7 +26,7 @@ const SuggestedProjects = ({ projects, onSelect }) => {
                   {project.title}
                 </p>
                 <p className="line-clamp-1 text-xs text-base-foreground/70">
-                  {project.author} • {project.category}
+                  {project.role} • {project.category}
                 </p>
               </div>
             </button>

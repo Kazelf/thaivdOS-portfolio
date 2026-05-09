@@ -17,11 +17,6 @@ const getProjectDescription = (project) => {
   return Array.isArray(raw) ? raw : [raw];
 };
 
-const getProjectImages = (project) =>
-  project.children
-    ?.filter((child) => child.fileType === "img" && child.image)
-    .map((child) => child.image) ?? [];
-
 const FILTER_ALL = "All";
 
 const FilterTabs = ({ filters, activeFilter, onChange }) => {
@@ -32,7 +27,7 @@ const FilterTabs = ({ filters, activeFilter, onChange }) => {
           type="button"
           key={filter}
           onClick={() => onChange(filter)}
-          className={`w-full rounded-lg border-l-2 px-4 py-2 text-left text-sm font-semibold transition-all duration-200 ${
+          className={`w-full rounded-lg border-l-2 px-4 py-2 text-left text-sm font-semibold ${
             filter === activeFilter
               ? "border-l-red-500 bg-base-300 text-base-foreground"
               : "border-l-transparent bg-base text-base-foreground hover:bg-base-300"
@@ -89,7 +84,6 @@ const Youtube = () => {
   const wifi = useSystemStore((state) => state.wifi);
   const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
-  const [projectViewMode, setProjectViewMode] = useState("list");
   const [savedScrollTop, setSavedScrollTop] = useState(0);
   const listRef = useRef(null);
 
@@ -99,20 +93,17 @@ const Youtube = () => {
         id: project.id,
         title: project.name,
         descriptionBlocks: getProjectDescription(project),
-        thumbnail: getProjectImages(project)[0] || "/images/wallpaper.png",
-        type: project.kind === "folder" ? "Project" : project.kind,
-        author: "Thaivd",
-        avatar: "/images/vudinhthai.png",
         tags: project.techStack || [],
         links:
           project.children
             ?.filter((child) => child.fileType === "url" && child.url)
             .map((child) => child.url) || [],
-        year: null,
         category: project.category || "Other",
         role: project.role || "Developer",
-        images: getProjectImages(project),
-        itemsCount: project.children?.length ?? 0,
+        images:
+          project.children
+            ?.filter((child) => child.fileType === "img" && child.image)
+            .map((child) => child.image) ?? [],
       })),
     [],
   );
@@ -145,19 +136,14 @@ const Youtube = () => {
     [normalizedProjects, selectedProjectId],
   );
 
-  const handleFilterChange = (filter) => {
-    setActiveFilter(filter);
-  };
-
   const openDetail = (projectId) => {
     const currentScroll = listRef.current?.scrollTop || 0;
     setSavedScrollTop(currentScroll);
     setSelectedProjectId(projectId);
-    setProjectViewMode("detail");
   };
 
   const handleBack = () => {
-    setProjectViewMode("list");
+    setSelectedProjectId(null);
     window.requestAnimationFrame(() => {
       if (listRef.current) listRef.current.scrollTop = savedScrollTop;
     });
@@ -166,9 +152,9 @@ const Youtube = () => {
   return (
     <div className="window-content flex flex-col bg-base overflow-y-hidden! p-0! h-full min-h-0">
       <header className="p-2 flex shrink-0 items-center justify-between border-b border-b-base-300 bg-base-200">
-        <div className="flex-center gap-2">
+        <div onClick={handleBack} className="cursor-pointer flex-center gap-2">
           <TvMinimalPlay className="h-10 text-red-500" />
-          <h2 className="text-lg font-semibold text-base-foreground">
+          <h2 className="select-none text-lg font-semibold text-base-foreground">
             MyProjects
           </h2>
         </div>
@@ -198,12 +184,12 @@ const Youtube = () => {
           <FilterTabs
             filters={filters}
             activeFilter={activeFilter}
-            onChange={handleFilterChange}
+            onChange={(filter) => setActiveFilter(filter)}
           />
         </aside>
 
         <div className="pl-4 min-h-0 flex-1 overflow-hidden">
-          {wifi && projectViewMode === "detail" && selectedProject ? (
+          {wifi && selectedProject ? (
             <ProjectDetailView
               project={selectedProject}
               projects={suggestedProjects}

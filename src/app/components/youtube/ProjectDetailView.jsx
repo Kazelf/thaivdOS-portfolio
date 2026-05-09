@@ -40,7 +40,7 @@ const ProjectDetailView = ({
         type="button"
         data-reveal
         onClick={onBack}
-        className="inline-flex items-center pr-3 rounded-full bg-base text-sm text-base-foreground hover:bg-base-200"
+        className="flex-center pr-3 rounded-full bg-base text-sm text-base-foreground hover:bg-base-200"
       >
         <ArrowLeft className="icon" />
         Back
@@ -88,8 +88,8 @@ const ProjectDetailView = ({
         className="rounded-2xl border border-base-300 bg-base-200/60 p-4 md:p-5"
         data-reveal
       >
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-base-foreground/70">
-          Brief
+        <h3 className="mb-2 text-sm font-semibold tracking-wide text-base-foreground/70">
+          BRIEF
         </h3>
         {Array.isArray(project.descriptionBlocks) &&
         project.descriptionBlocks.length > 0 ? (
@@ -109,32 +109,31 @@ const ProjectDetailView = ({
 
         <hr className="my-2 text-base-300" />
 
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-base-foreground/70">
-          Links
+        <h3 className="mb-3 text-sm font-semibold tracking-wide text-base-foreground/70">
+          LINKS
         </h3>
         <div className="space-y-2">
           {project.links?.[0] && (
-            <p className="inline-flex items-center gap-2 text-sm font-semibold text-base-foreground/70">
-              Production:{" "}
+            <p className="text-sm font-semibold text-base-foreground/70">
+              <span>Production: </span>
               <a
                 href={project.links[0]}
                 target="_blank"
                 rel="noreferrer"
-                className="block truncate text-sm text-primary transition hover:underline"
+                className="break-all text-sm text-primary transition hover:underline"
               >
                 {project.links[0]}
               </a>
             </p>
           )}
-          <br />
           {project.links?.[1] && (
-            <p className="inline-flex items-center gap-2 text-sm font-semibold text-base-foreground/70">
-              Source:{" "}
+            <p className="text-sm font-semibold text-base-foreground/70">
+              <span>Source: </span>
               <a
                 href={project.links[1]}
                 target="_blank"
                 rel="noreferrer"
-                className="block truncate text-sm text-primary transition hover:underline"
+                className="break-all text-sm text-primary transition hover:underline"
               >
                 {project.links[1]}
               </a>
