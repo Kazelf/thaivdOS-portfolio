@@ -10,8 +10,6 @@ const ProjectDetailView = ({
   project,
   projects,
   isFullscreen,
-  currentImageIndex,
-  onImageChange,
   onBack,
   onSelectProject,
 }) => {
@@ -38,24 +36,18 @@ const ProjectDetailView = ({
 
   const main = (
     <div ref={containerRef} className="min-w-0 space-y-4">
-      <div className="flex items-center justify-between" data-reveal>
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 rounded-full border border-base-300 bg-base px-3 py-1.5 text-sm font-medium text-base-foreground transition hover:bg-base-200"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back
-        </button>
-      </div>
+      <button
+        type="button"
+        data-reveal
+        onClick={onBack}
+        className="inline-flex items-center pr-3 rounded-full bg-base text-sm text-base-foreground hover:bg-base-200"
+      >
+        <ArrowLeft className="icon" />
+        Back
+      </button>
 
       <div data-reveal>
-        <ProjectCarousel
-          images={project.images}
-          title={project.title}
-          currentIndex={currentImageIndex}
-          onChangeIndex={onImageChange}
-        />
+        <ProjectCarousel images={project.images} title={project.title} />
       </div>
 
       <div
@@ -66,7 +58,7 @@ const ProjectDetailView = ({
           <Image
             className="rounded-full p-1 object-cover"
             src={"/images/vudinhthai.png"}
-            height={30}
+            height={40}
             width={40}
             alt="Me.png"
           />
@@ -99,9 +91,61 @@ const ProjectDetailView = ({
         <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-base-foreground/70">
           Brief
         </h3>
-        <p className="whitespace-pre-line leading-relaxed text-base text-base-foreground/90">
-          {project.description || "No description available."}
-        </p>
+        {Array.isArray(project.descriptionBlocks) &&
+        project.descriptionBlocks.length > 0 ? (
+          <div className="space-y-3 leading-relaxed text-base-foreground/90">
+            {project.descriptionBlocks.map((para, index) => (
+              <p
+                key={`${project.id}-brief-${index}`}
+                dangerouslySetInnerHTML={{ __html: para }}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="whitespace-pre-line leading-relaxed text-base-foreground/90">
+            No description available.
+          </p>
+        )}
+
+        <hr className="my-2 text-base-300" />
+
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-base-foreground/70">
+          Links
+        </h3>
+        <div className="space-y-2">
+          {project.links?.[0] && (
+            <p className="inline-flex items-center gap-2 text-sm font-semibold text-base-foreground/70">
+              Production:{" "}
+              <a
+                href={project.links[0]}
+                target="_blank"
+                rel="noreferrer"
+                className="block truncate text-sm text-primary transition hover:underline"
+              >
+                {project.links[0]}
+              </a>
+            </p>
+          )}
+          <br />
+          {project.links?.[1] && (
+            <p className="inline-flex items-center gap-2 text-sm font-semibold text-base-foreground/70">
+              Source:{" "}
+              <a
+                href={project.links[1]}
+                target="_blank"
+                rel="noreferrer"
+                className="block truncate text-sm text-primary transition hover:underline"
+              >
+                {project.links[1]}
+              </a>
+            </p>
+          )}
+          {!project.links?.[0] && !project.links?.[1] && (
+            <p className="text-sm text-base-foreground/70">
+              No links available.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -112,13 +156,9 @@ const ProjectDetailView = ({
 
   return (
     <div className="h-full overflow-y-auto pr-1">
-      <div className="grid min-h-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid min-h-0 grid-cols-1 xl:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0">{main}</div>
-        <SuggestedProjects
-          projects={projects}
-          activeId={project.id}
-          onSelect={onSelectProject}
-        />
+        <SuggestedProjects projects={projects} onSelect={onSelectProject} />
       </div>
     </div>
   );

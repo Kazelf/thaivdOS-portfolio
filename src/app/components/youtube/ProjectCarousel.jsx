@@ -1,14 +1,19 @@
 "use client";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsapClient";
 
-const ProjectCarousel = ({ images, title, currentIndex, onChangeIndex }) => {
+const ProjectCarousel = ({ images, title }) => {
   const frameRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const safeImages = useMemo(
     () => (images?.length ? images : ["/images/wallpaper.png"]),
     [images],
   );
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [images]);
 
   useGSAP(
     () => {
@@ -22,28 +27,27 @@ const ProjectCarousel = ({ images, title, currentIndex, onChangeIndex }) => {
     { dependencies: [currentIndex] },
   );
 
-  const canNavigate = safeImages.length > 1;
   const prev = () =>
-    onChangeIndex(
+    setCurrentIndex(
       currentIndex === 0
         ? safeImages.length - 1
         : Math.max(0, currentIndex - 1),
     );
   const next = () =>
-    onChangeIndex(
+    setCurrentIndex(
       currentIndex === safeImages.length - 1 ? 0 : currentIndex + 1,
     );
 
   return (
-    <div className="relative overflow-hidden border border-base-foreground">
+    <div className="relative h-[34vh] md:h-[42vh] rounded-xl bg-black/80 overflow-hidden border border-base-foreground">
       <img
         ref={frameRef}
         src={safeImages[currentIndex]}
         alt={title}
-        className="h-[34vh] w-full object-cover md:h-[42vh]"
+        className="h-full mx-auto"
       />
 
-      {canNavigate && (
+      {safeImages.length > 1 && (
         <>
           <button
             type="button"
@@ -69,7 +73,7 @@ const ProjectCarousel = ({ images, title, currentIndex, onChangeIndex }) => {
           <button
             type="button"
             key={`${img}-${idx}`}
-            onClick={() => onChangeIndex(idx)}
+            onClick={() => setCurrentIndex(idx)}
             className={`h-2.5 w-2.5 rounded-full transition ${
               idx === currentIndex ? "bg-red-400" : "bg-base-300"
             }`}
