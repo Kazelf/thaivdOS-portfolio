@@ -7,6 +7,9 @@ import { locations } from "../constants";
 import useWindowStore from "../store/window";
 import useSystemStore from "../store/system";
 import ProjectDetailView from "../components/youtube/ProjectDetailView";
+import FilterTabs from "../components/youtube/FilterTabs";
+import ProjectListItem from "../components/youtube/ProjectListItem";
+import useProjectFilters from "../hooks/useProjectFilters";
 
 const projects = locations?.work?.children ?? [];
 
@@ -17,72 +20,12 @@ const getProjectDescription = (project) => {
   return Array.isArray(raw) ? raw : [raw];
 };
 
-const FILTER_ALL = "All";
-
-const FilterTabs = ({ filters, activeFilter, onChange }) => {
-  return (
-    <div className="flex flex-col gap-2">
-      {filters.map((filter) => (
-        <button
-          type="button"
-          key={filter}
-          onClick={() => onChange(filter)}
-          className={`w-full rounded-lg border-l-2 px-4 py-2 text-left text-sm font-semibold ${
-            filter === activeFilter
-              ? "border-l-red-500 bg-base-300 text-base-foreground"
-              : "border-l-transparent bg-base text-base-foreground hover:bg-base-300"
-          }`}
-        >
-          {filter}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-const ProjectCard = ({ project, isFullscreen, onClick }) => {
-  return (
-    <article
-      onClick={() => onClick(project.id)}
-      className="group h-full cursor-pointer border border-transparent p-2 transition-all duration-300 hover:bg-base-200 hover:border-base-foreground hover:shadow-[0_0_20px_rgba(255,0,0,0.12)]"
-    >
-      <div className="mb-3 border border-base-300 overflow-hidden ">
-        <img
-          src={project.images[0] || "/images/wallpaper.png"}
-          alt={project.title}
-          className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 ${isFullscreen ? "h-50" : "h-34"}`}
-        />
-      </div>
-
-      <div className="flex items-center gap-2">
-        <Image
-          className="rounded-full p-1 object-cover"
-          src={"/images/vudinhthai.png"}
-          height={30}
-          width={40}
-          alt="Me.png"
-        />
-
-        <div>
-          <h5 className="line-clamp-1 text-sm font-semibold leading-snug text-base-foreground">
-            {project.title}
-          </h5>
-          <p className="line-clamp-1 text-xs text-base-foreground/70">
-            {project.role} • {project.category}
-          </p>
-        </div>
-      </div>
-    </article>
-  );
-};
-
 const Youtube = () => {
   const isFullscreen = useWindowStore(
     (state) => state.windows.youtube?.isFullscreen,
   );
 
   const wifi = useSystemStore((state) => state.wifi);
-  const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [savedScrollTop, setSavedScrollTop] = useState(0);
   const listRef = useRef(null);
@@ -108,20 +51,8 @@ const Youtube = () => {
     [],
   );
 
-  const filters = useMemo(() => {
-    const unique = Array.from(
-      new Set(normalizedProjects.map((project) => project.category)),
-    );
-    return [FILTER_ALL, ...unique];
-  }, [normalizedProjects]);
-
-  const filteredProjects = useMemo(() => {
-    return normalizedProjects.filter((project) => {
-      const matchCategory =
-        activeFilter === FILTER_ALL || project.category === activeFilter;
-      return matchCategory;
-    });
-  }, [activeFilter, normalizedProjects]);
+  const { activeFilter, setActiveFilter, filters, filteredProjects } =
+    useProjectFilters(normalizedProjects);
 
   const selectedProject = useMemo(
     () =>
@@ -205,11 +136,12 @@ const Youtube = () => {
                 }`}
               >
                 {filteredProjects.map((project) => (
-                  <ProjectCard
+                  <ProjectListItem
                     key={project.id}
                     project={project}
+                    onSelect={openDetail}
+                    variant="grid"
                     isFullscreen={isFullscreen}
-                    onClick={openDetail}
                   />
                 ))}
               </div>
