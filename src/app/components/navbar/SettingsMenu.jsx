@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Tooltip } from "react-tooltip";
 import { useTheme } from "next-themes";
@@ -20,16 +20,6 @@ import {
 import MenuWrapper from "@/app/hoc/MenuWrapper";
 import { useSystemStore, useLocationStore, useWindowStore } from "@/app/store";
 import { SYSTEM_COLOR_PALETTE } from "@/app/constants";
-
-const applySystemColor = (palette) => {
-  if (typeof window === "undefined") return;
-
-  const root = document.documentElement;
-  root.style.setProperty("--primary", palette.primary);
-  root.style.setProperty("--primary-200", palette.primary200);
-  root.style.setProperty("--primary-300", palette.primary300);
-  root.style.setProperty("--primary-foreground", palette.foreground);
-};
 
 const ControlButton = React.memo(
   ({ name, description, active, onToggle, Icon }) => {
@@ -67,21 +57,14 @@ const SettingsMenu = () => {
     setTheme(dark ? "light" : "dark");
   };
 
-  const [activeSystemColor, setActiveSystemColor] = useState("blue");
-
-  const handleSystemColorChange = (colorKey) => {
-    const palette = SYSTEM_COLOR_PALETTE[colorKey];
-    if (!palette) return;
-
-    setActiveSystemColor(colorKey);
-    applySystemColor(palette);
-  };
-
   const wifi = useSystemStore((s) => s.wifi);
   const toggleWifi = useSystemStore((s) => s.toggleWifi);
 
   const bluetooth = useSystemStore((s) => s.bluetooth);
   const toggleBluetooth = useSystemStore((s) => s.toggleBluetooth);
+
+  const systemColor = useSystemStore((s) => s.systemColor);
+  const setSystemColor = useSystemStore((s) => s.setSystemColor);
 
   const audioPlaying = useSystemStore((s) => s.audioPlaying);
   const toggleAudioPlaying = useSystemStore((s) => s.toggleAudioPlaying);
@@ -93,6 +76,20 @@ const SettingsMenu = () => {
   const setBrightness = useSystemStore((s) => s.setBrightness);
 
   const activeSong = useLocationStore((s) => s.activeSong);
+
+  const handleSystemColorChange = (colorKey) => {
+    const palette = SYSTEM_COLOR_PALETTE[colorKey];
+    if (!palette) return;
+
+    setSystemColor(colorKey);
+
+    if (typeof window === "undefined") return;
+    const root = document.documentElement;
+    root.style.setProperty("--primary", palette.primary);
+    root.style.setProperty("--primary-200", palette.primary200);
+    root.style.setProperty("--primary-300", palette.primary300);
+    root.style.setProperty("--primary-foreground", palette.foreground);
+  };
 
   return (
     <div className="grid grid-cols-4 grid-rows-2 gap-2 w-full">
@@ -158,7 +155,7 @@ const SettingsMenu = () => {
               key={colorKey}
               className={clsx(
                 "w-6 h-6 rounded-full cursor-pointer border border-base-foreground/20",
-                activeSystemColor === colorKey && "ring-2 ring-primary",
+                systemColor === colorKey && "ring-2 ring-primary-200",
               )}
               style={{
                 backgroundColor: SYSTEM_COLOR_PALETTE[colorKey].primary,

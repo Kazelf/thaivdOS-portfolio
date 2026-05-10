@@ -8,6 +8,7 @@ const useSystemStore = create(
     login: false,
     wifi: true,
     bluetooth: true,
+    systemColor: "blue",
     airdrop: true,
     audioPlaying: false,
 
@@ -34,6 +35,11 @@ const useSystemStore = create(
     toggleBluetooth: () =>
       set((state) => {
         state.bluetooth = !state.bluetooth;
+      }),
+
+    setSystemColor: (color) =>
+      set((state) => {
+        state.systemColor = color;
       }),
 
     toggleAirDrop: () =>
