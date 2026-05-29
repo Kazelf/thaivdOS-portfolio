@@ -62,7 +62,7 @@ const ScreenApps = () => {
         <h3 className="text-center font-semibold text-lg italic">
           My Projects
         </h3>
-        {renderApps(projects)}
+        {renderApps(projects.slice(0, 4))}
       </div>
     </section>
   );
