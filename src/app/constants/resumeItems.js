@@ -43,6 +43,15 @@ const achievements = [
     ],
   },
   {
+    id: 4,
+    date: "June 2026",
+    title: "Hack CX Together 2026",
+    role: "Finalist",
+    description: [
+      "Proposed idea about the problem: Voice Agents in Banking Apps",
+    ],
+  },
+  {
     id: 2,
     date: "Feb 2025",
     title: "Algorithm Arena 6.0: Enjourney",
@@ -60,15 +69,7 @@ const achievements = [
       "Competed and ranked in the Top 40 of Group A - Professional division",
     ],
   },
-  {
-    id: 4,
-    date: "June 2025",
-    title: "VPBank Hackthon 2025",
-    role: "Participated",
-    description: [
-      "Proposed idea about the problem: AI Financial coach_Six Jars Money Management of Banking Apps",
-    ],
-  },
+
 ];
 
 const experiences = [
