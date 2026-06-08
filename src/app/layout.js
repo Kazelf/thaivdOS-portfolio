@@ -22,8 +22,24 @@ export const metadata = {
     google: "1ZopRgwzU2_JK9VH8wg6Y9JabDzIUWPxcje5cPBVU8k",
   },
   title: "Vũ Đình Thái",
-  description:
-    "Thai Vu - Backend Developer specializing in Node.js, Express.js, MongoDB",
+  description: "macOS-style portfolio by Vu Dinh Thai",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/images/thai.png",
+    apple: "/images/thai.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Thai Portfolio",
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f6f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1e1e1f" },
+  ],
 };
 
 export default function RootLayout({ children }) {

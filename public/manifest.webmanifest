@@ -1,0 +1,24 @@
+{
+  "name": "Vu Dinh Thai Portfolio",
+  "short_name": "Thai Portfolio",
+  "description": "macOS-style portfolio by Vu Dinh Thai",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1e1e1f",
+  "theme_color": "#1e1e1f",
+  "icons": [
+    {
+      "src": "/images/thai.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/vudinhthai.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
