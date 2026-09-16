@@ -17,6 +17,17 @@ const games = [
     source: "https://gitea.com/akouzoukos/apotris",
   },
   {
+    id: "anguna",
+    name: "Anguna",
+    system: "gba",
+    developer: "gauauu",
+    genre: "Adventure",
+    license: "MIT",
+    rom: "/emulator/roms/anguna.gba",
+    cover: "/emulator/covers/anguna.png",
+    source: "https://gauauu.itch.io/anguna",
+  },
+  {
     id: "meteorain",
     name: "MeteoRain",
     system: "gba",

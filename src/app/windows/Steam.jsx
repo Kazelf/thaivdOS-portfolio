@@ -200,7 +200,7 @@ const Steam = () => {
               <div className="text-sm text-base-foreground/70 space-y-1">
                 {selected.license && (
                   <p className="flex items-center gap-1">
-                    Open-source homebrew · {selected.license} ·
+                    Open-source · {selected.license} ·
                     <a
                       href={selected.source}
                       target="_blank"
