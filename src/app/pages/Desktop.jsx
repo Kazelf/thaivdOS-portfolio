@@ -1,4 +1,5 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { NavBar, HeroSection, Dock, ScreenApps } from "../components";
 import {
   Terminal,
@@ -16,12 +17,16 @@ import {
 import { useIsDesktop } from "../hooks";
 import { useSystemStore, useWindowStore } from "../store";
 
+// Loaded only when opened; the emulator itself runs inside an iframe.
+const Steam = dynamic(() => import("../windows/Steam"), { ssr: false });
+
 const Desktop = () => {
   const { isDesktopSafe } = useIsDesktop();
   const { brightness } = useSystemStore();
   const isVSCodeOpen = useWindowStore(
     (state) => state.windows["vscode"].isOpen,
   );
+  const isSteamOpen = useWindowStore((state) => state.windows["steam"].isOpen);
 
   return (
     <>
@@ -51,6 +56,7 @@ const Desktop = () => {
           <Spotify />
           {isVSCodeOpen && <VSCode />}
           <Wordle />
+          {isSteamOpen && <Steam />}
         </>
       )}
     </>

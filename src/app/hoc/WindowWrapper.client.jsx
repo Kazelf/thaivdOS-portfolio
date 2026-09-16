@@ -44,9 +44,17 @@ const WindowWrapperClient = ({
     const header = el.querySelector(".window-header");
     if (!header) return;
 
+    // Stop iframes (VS Code, Steam) from swallowing pointer events mid-drag.
+    const stopDragging = () =>
+      document.body.classList.remove("window-dragging");
+
     const [instance] = Draggable.create(el, {
       trigger: header,
+      onDragStart: () => {
+        document.body.classList.add("window-dragging");
+      },
       onDragEnd: function onDragEnd() {
+        stopDragging();
         setWindowBounds(windowKey, {
           x: this.x,
           y: this.y,
@@ -59,7 +67,10 @@ const WindowWrapperClient = ({
       },
     });
 
-    return () => instance.kill();
+    return () => {
+      instance.kill();
+      stopDragging();
+    };
   }, [isDesktopSafe, data, isFullscreen, bounds, setWindowBounds, windowKey]);
 
   useLayoutEffect(() => {

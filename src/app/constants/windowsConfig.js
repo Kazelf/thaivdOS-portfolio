@@ -21,6 +21,7 @@ const WINDOW_CONFIG = {
   photos: createWindowState(),
   terminal: createWindowState(),
   wordle: createWindowState(),
+  steam: createWindowState(),
   txtfile: createWindowState(),
   imgfile: createWindowState(),
 };

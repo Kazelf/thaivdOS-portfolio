@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emulator</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+      }
+      #game {
+        width: 100%;
+        height: 100%;
+      }
+      #error {
+        color: #fff;
+        font: 14px system-ui, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <script>
+      (function () {
+        var CORES = { nes: "fceumm", gba: "mgba" };
+        var params = new URLSearchParams(location.search);
+        var system = params.get("system");
+        var rom = params.get("rom") || "";
+        var name = params.get("name") || "game";
+
+        // Only load bundled ROMs or blob URLs created by this origin.
+        var romAllowed =
+          rom.indexOf("/emulator/roms/") === 0 ||
+          rom.indexOf("blob:" + location.origin + "/") === 0;
+
+        if (!CORES[system] || !romAllowed) {
+          document.body.innerHTML = '<div id="error">Invalid game.</div>';
+          return;
+        }
+
+        window.EJS_player = "#game";
+        window.EJS_core = CORES[system];
+        window.EJS_gameUrl = rom;
+        window.EJS_gameName = name;
+        window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+        window.EJS_startOnLoaded = true;
+        window.EJS_color = "#1a9fff";
+
+        var script = document.createElement("script");
+        script.src = window.EJS_pathtodata + "loader.js";
+        document.body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html>

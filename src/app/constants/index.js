@@ -24,3 +24,6 @@ export { musics };
 
 import { WORDS, SECRET_WORDS } from "./wordleWords";
 export { WORDS, SECRET_WORDS };
+
+import { games, gameSystems } from "./gamesList";
+export { games, gameSystems };
