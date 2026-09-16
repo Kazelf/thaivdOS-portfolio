@@ -1,0 +1,76 @@
+const gameSystems = {
+  nes: { name: "NES", extensions: [".nes"] },
+  gba: { name: "Game Boy Advance", extensions: [".gba"] },
+};
+
+// Open-source homebrew from Homebrew Hub (https://hh.gbdev.io)
+const games = [
+  {
+    id: "apotris",
+    name: "Apotris",
+    system: "gba",
+    developer: "akouzoukos",
+    genre: "Puzzle",
+    license: "GPL-3.0",
+    rom: "/emulator/roms/apotris.gba",
+    cover: "/emulator/covers/apotris.gif",
+    source: "https://gitea.com/akouzoukos/apotris",
+  },
+  {
+    id: "anguna",
+    name: "Anguna",
+    system: "gba",
+    developer: "gauauu",
+    genre: "Adventure",
+    license: "MIT",
+    rom: "/emulator/roms/anguna.gba",
+    cover: "/emulator/covers/anguna.png",
+    source: "https://gauauu.itch.io/anguna",
+  },
+  {
+    id: "meteorain",
+    name: "MeteoRain",
+    system: "gba",
+    developer: "Dr. Ludos",
+    genre: "Arcade",
+    license: "MIT",
+    rom: "/emulator/roms/meteorain.gba",
+    cover: "/emulator/covers/meteorain.gif",
+    source: "https://github.com/drludos/meteorain-gba",
+  },
+  {
+    id: "nova",
+    name: "Nova the Squirrel",
+    system: "nes",
+    developer: "NovaSquirrel",
+    genre: "Platformer",
+    license: "GPL-3.0",
+    rom: "/emulator/roms/nova.nes",
+    cover: "/emulator/covers/nova.png",
+    source: "https://github.com/NovaSquirrel/NovaTheSquirrel",
+  },
+  {
+    id: "thwaite",
+    name: "Thwaite",
+    system: "nes",
+    developer: "Damian Yerrick",
+    genre: "Action",
+    license: "GPL-3.0",
+    rom: "/emulator/roms/thwaite.nes",
+    cover: "/emulator/covers/thwaite.png",
+    source: "https://github.com/pinobatch/thwaite-nes",
+  },
+  {
+    id: "croom",
+    name: "Concentration Room",
+    system: "nes",
+    developer: "Damian Yerrick",
+    genre: "Puzzle",
+    license: "GPL-3.0",
+    rom: "/emulator/roms/croom.nes",
+    cover: "/emulator/covers/croom.png",
+    source: "https://github.com/pinobatch/croom-nes",
+  },
+];
+
+export { games, gameSystems };

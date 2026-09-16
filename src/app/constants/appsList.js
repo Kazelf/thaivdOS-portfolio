@@ -13,12 +13,6 @@ const dockApps = [
     kind: "app",
     icon: "safari.svg",
   },
-  // {
-  //   id: "photos",
-  //   name: "Gallery",
-  //   kind: "app",
-  //   icon: "photos.svg",
-  // },
   {
     id: "contact",
     name: "Contact",
@@ -55,12 +49,12 @@ const dockApps = [
     kind: "app",
     icon: "wordle.png",
   },
-  // {
-  //   id: "trash",
-  //   name: "Archives",
-  //   kind: "app",
-  //   icon: "trash.svg",
-  // },
+  {
+    id: "steam",
+    name: "Steam",
+    kind: "app",
+    icon: "steam.png",
+  },
 ];
 
 const screenApps = [
