@@ -108,6 +108,58 @@ body {
   --blur-bg: rgba(0, 0, 0, 0.5);
 }
 
+/* ===== Steam window theme (dark blue, like the real client) ===== */
+.steam-theme {
+  --base: #171a21;
+  --base-200: #1b2838;
+  --base-300: #2a475e;
+  --base-foreground: #c7d5e0;
+
+  --primary: #66c0f4;
+  --primary-200: #a4d7f5;
+  --primary-300: #417a9b;
+  --primary-foreground: #0e1c26;
+
+  /* Tailwind resolves --color-* at :root, so re-point them here too. */
+  --color-base: var(--base);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-foreground: var(--base-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-foreground: var(--primary-foreground);
+
+  color: var(--base-foreground);
+}
+
+.steam-theme .window-header {
+  color: var(--base-foreground);
+}
+
+.steam-theme .side-bar h3 {
+  @apply uppercase tracking-wider text-primary/70;
+}
+
+.steam-theme .side-bar ul li.active {
+  @apply bg-primary/20 text-primary;
+}
+
+.steam-theme .side-bar ul li.not-active {
+  @apply hover:bg-base-300/60;
+}
+
+/* Steam's green install/play button */
+.steam-play {
+  background-image: linear-gradient(to bottom, #75b022, #588a1b);
+  @apply text-white;
+}
+
+.steam-play:hover {
+  background-image: linear-gradient(to bottom, #8ed629, #6aa621);
+}
+
 /* ===== Utilities ===== */
 @utility flex-center {
   @apply flex items-center justify-center;
